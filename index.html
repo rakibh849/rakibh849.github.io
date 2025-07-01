@@ -1,190 +1,153 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Boom Flim 2.0</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
+      margin: 0;
+      padding: 0;
       background-color: #141414;
       font-family: 'Poppins', sans-serif;
       color: #fff;
-      margin: 0;
-      padding: 0;
     }
 
-    header {
-      background-color: #000;
-      padding: 15px 20px;
+    .top-bar {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      color: red;
-      font-size: 28px;
-      margin: 0;
+      justify-content: flex-end;
+      padding: 20px;
+      background-color: #000;
     }
 
     .telegram-btn {
-      background-color: #229ED9;
-      color: white;
-      padding: 10px 20px;
+      background: #229ED9;
+      color: #fff;
+      padding: 10px 16px;
       border-radius: 30px;
       text-decoration: none;
       font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .telegram-btn:hover {
+      background: #00cfff;
     }
 
     .section-title {
-      margin: 20px;
-      font-size: 22px;
-      color: #fff;
-      border-left: 5px solid red;
-      padding-left: 10px;
+      font-size: 24px;
+      color: #00ffe1;
+      margin: 30px 20px 10px;
     }
 
-    .grid {
+    .episode-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
       padding: 20px;
     }
 
     .card {
-      background-color: #222;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      transition: transform 0.3s;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #333;
+      padding: 15px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
     }
 
     .card:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
     }
 
-    .card iframe {
-      width: 100%;
-      height: 180px;
-      border: none;
-    }
-
-    .card-content {
-      padding: 15px;
-    }
-
-    .card-content h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #00ffd5;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .card p {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 10px 0 8px;
     }
 
     .btn {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
+      display: inline-block;
+      padding: 8px 14px;
+      margin: 5px 5px 0 0;
+      border-radius: 6px;
       font-weight: bold;
-      text-align: center;
-      text-decoration: none;
       font-size: 14px;
+      text-decoration: none;
+      color: #fff;
       transition: 0.3s;
     }
 
     .btn-watch {
       background-color: #28a745;
-      color: white;
     }
 
     .btn-download {
       background-color: #007bff;
-      color: white;
     }
 
     .coming {
-      text-align: center;
-      font-style: italic;
       color: yellow;
-      padding: 10px 0;
-    }
-
-    @media (max-width: 500px) {
-      header h1 {
-        font-size: 22px;
-      }
-
-      .section-title {
-        font-size: 18px;
-      }
+      font-style: italic;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Boom Flim 2.0</h1>
-  <a class="telegram-btn" href="https://t.me/bachelorpointseason0005" target="_blank">📢 Telegram</a>
-</header>
+<!-- Top Telegram Button -->
+<div class="top-bar">
+  <a class="telegram-btn" href="https://t.me/bachelorpointseason0005" target="_blank">📢 Join Telegram Channel</a>
+</div>
 
-<div class="section-title">📺 Bachelor Point Season 5 <span class="coming">(আসছে ৩ তারিখ)</span></div>
-<div class="coming">⏳ সব এপিসোড খুব শীঘ্রই আসছে!</div>
-
-<div class="section-title">🎬 Myself Allen Shopon</div>
-<div class="grid">
-
-  <!-- Episode 1 -->
+<!-- Bachelor Point Section -->
+<h2 class="section-title">📺 Bachelor Point Season 5 <span class="coming">(আসছে ৩ তারিখ)</span></h2>
+<div class="episode-grid">
   <div class="card">
-    <iframe src="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/preview" allow="autoplay"></iframe>
-    <div class="card-content">
-      <h3>Episode 1</h3>
-      <div class="buttons">
-        <a class="btn btn-watch" href="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/view" target="_blank">▶ Watch</a>
-        <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp" target="_blank">⬇ Download</a>
-      </div>
-    </div>
+    <p>Episode 1 - 120</p>
+    <p class="coming">⏳ সব এপিসোড খুব শীঘ্রই আসছে!</p>
+  </div>
+</div>
+
+<!-- Myself Allen Shopon Section -->
+<h2 class="section-title">🎬 Myself Allen Shopon</h2>
+<div class="episode-grid">
+
+  <div class="card">
+    <p>Episode 1</p>
+    <a class="btn btn-watch" href="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/view?usp=drivesdk" target="_blank">▶ Watch</a>
+    <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp" target="_blank">⬇ Download</a>
   </div>
 
-  <!-- Episode 2 -->
   <div class="card">
-    <iframe src="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/preview" allow="autoplay"></iframe>
-    <div class="card-content">
-      <h3>Episode 2</h3>
-      <div class="buttons">
-        <a class="btn btn-watch" href="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/view" target="_blank">▶ Watch</a>
-        <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow" target="_blank">⬇ Download</a>
-      </div>
-    </div>
+    <p>Episode 2</p>
+    <a class="btn btn-watch" href="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/view?usp=drivesdk" target="_blank">▶ Watch</a>
+    <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow" target="_blank">⬇ Download</a>
   </div>
 
-  <!-- Episode 3 -->
   <div class="card">
-    <iframe src="https://drive.google.com/file/d/1DSYqRTQf3Zlmqd6OdkywGlFVKDcpm6En/preview" allow="autoplay"></iframe>
-    <div class="card-content">
-      <h3>Episode 3</h3>
-      <div class="buttons">
-        <a class="btn btn-watch" href="https://drive.google.com/file/d/1DSYqRTQf3Zlmqd6OdkywGlFVKDcpm6En/view" target="_blank">▶ Watch</a>
-        <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1DSYqRTQf3Zlmqd6OdkywGlFVKDcpm6En" target="_blank">⬇ Download</a>
-      </div>
-    </div>
+    <p>Episode 3</p>
+    <a class="btn btn-watch" href="https://drive.google.com/file/d/1DSYqRTQf3Zlmqd6OdkywGlFVKDcpm6En/view?usp=drivesdk" target="_blank">▶ Watch</a>
+    <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1DSYqRTQf3Zlmqd6OdkywGlFVKDcpm6En" target="_blank">⬇ Download</a>
   </div>
 
-  <!-- Episode 7 -->
   <div class="card">
-    <iframe src="https://drive.google.com/file/d/1ApnseIxEJyWjxa0ysAE5mFYtXs7RO7Hk/preview" allow="autoplay"></iframe>
-    <div class="card-content">
-      <h3>Episode 7</h3>
-      <div class="buttons">
-        <a class="btn btn-watch" href="https://drive.google.com/file/d/1ApnseIxEJyWjxa0ysAE5mFYtXs7RO7Hk/view" target="_blank">▶ Watch</a>
-        <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1ApnseIxEJyWjxa0ysAE5mFYtXs7RO7Hk" target="_blank">⬇ Download</a>
-      </div>
-    </div>
+    <p>Episode 4</p>
+    <a class="btn btn-watch" href="https://drive.google.com/file/d/1pUDWLLA0-OS7Ri7ksEdC8t7wYzf8R3iO/view?usp=drivesdk" target="_blank">▶ Watch</a>
+    <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1pUDWLLA0-OS7Ri7ksEdC8t7wYzf8R3iO" target="_blank">⬇ Download</a>
+  </div>
+
+  <div class="card">
+    <p>Episode 5</p>
+    <a class="btn btn-watch" href="https://drive.google.com/file/d/1cR5Lbw4YBW_8K2LD_UwKjAFtmq_9AojK/view?usp=drivesdk" target="_blank">▶ Watch</a>
+    <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1cR5Lbw4YBW_8K2LD_UwKjAFtmq_9AojK" target="_blank">⬇ Download</a>
+  </div>
+
+  <div class="card">
+    <p>Episode 6</p>
+    <a class="btn btn-watch" href="https://drive.google.com/file/d/1dOEIK0TwSCWxe8qNGd55RmnrMDuyTLQW/view?usp=drivesdk" target="_blank">▶ Watch</a>
+    <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1dOEIK0TwSCWxe8qNGd55RmnrMDuyTLQW" target="_blank">⬇ Download</a>
   </div>
 
 </div>
