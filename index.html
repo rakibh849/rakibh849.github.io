@@ -1,167 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Boom Flim 2.0</title>
-  <style>
-    body {
-      background-color: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      color: #ff5050;
-    }
-    .series {
-      background-color: #222;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 10px #000;
-    }
-    .series img {
-      width: 100%;
-      max-width: 400px;
-      border-radius: 10px;
-    }
-    .toggle-btn {
-      background-color: #00cc66;
-      border: none;
-      padding: 10px 20px;
-      color: white;
-      font-weight: bold;
-      border-radius: 5px;
-      margin: 10px 0;
-      cursor: pointer;
-    }
-    .episode {
-      display: none;
-      background-color: #1a1a1a;
-      padding: 10px;
-      margin-top: 15px;
-      border-radius: 10px;
-    }
-    iframe {
-      width: 100%;
-      height: 250px;
-      border: none;
-      margin-top: 10px;
-      border-radius: 10px;
-    }
-    .btn {
-      display: inline-block;
-      margin: 8px 5px;
-      padding: 10px 15px;
-      border-radius: 5px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      border: none;
-    }
-    .watch { background-color: #28a745; }
-    .download { background-color: #007bff; }
-  </style>
-</head>
-<body>
-
-  <h1>🎬 Boom Flim 2.0</h1>
-
-  <!-- Bachelor Point Season 5 -->
-  <div class="series">
-    <h2>Bachelor Point Season 5</h2>
-    <img src="https://i.ibb.co/3m7d6Bs/bachelor-point-poster.jpg" alt="Bachelor Point Poster">
-    <p>📅 Releasing on: ৩ তারিখ</p>
-    <a class="btn download" href="https://t.me/bachelorpointseason0005" target="_blank">📥 Join Telegram</a>
-  </div>
-
-  <!-- Myself Allen Shopon Series -->
-  <div class="series">
-    <h2>Myself Allen Shopon</h2>
-    <img src="https://i.imgur.com/NPLgK1W.jpg" alt="Myself Allen Poster">
-    <button class="toggle-btn" onclick="toggleEpisodes()">▶️ Show Episodes</button>
-
-    <div class="episode" id="episodeList">
-      <!-- Episode 1 -->
-      <div>
-        <h3>Episode 1</h3>
-        <iframe src="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/preview" allow="autoplay"></iframe>
-        <a class="btn watch" href="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/preview" target="_blank">▶️ Watch Fullscreen</a>
-        <a class="btn download" href="https://drive.google.com/uc?export=download&id=1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp" target="_blank">⬇️ Download</a>
-      </div>
-
-      <!-- Episode 2 -->
-      <div style="margin-top:30px;">
-        <h3>Episode 2</h3>
-        <iframe src="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/preview" allow="autoplay"></iframe>
-        <a class="btn watch" href="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/preview" target="_blank">▶️ Watch Fullscreen</a>
-        <a class="btn download" href="https://drive.google.com/uc?export=download&id=1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow" target="_blank">⬇️ Download</a>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function toggleEpisodes() {
-      var ep = document.getElementById("episodeList");
-      if (ep.style.display === "none" || ep.style.display === "") {
-        ep.style.display = "block";
-      } else {
-        ep.style.display = "none";
-      }
-    }
-  </script>
-
-</body>
-</html>
-<!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
   <title>Boom Flim 2.0</title>
   <style>
-    body { background: #111; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; }
-    .series { background: #222; margin: 20px auto; padding: 20px; max-width: 600px; border-radius: 10px; }
-    .series img { width: 100%; max-width: 400px; border-radius: 8px; margin-bottom: 10px; }
-    .btn { display: inline-block; margin: 8px; padding: 10px 20px; color: white; border: none; border-radius: 5px; text-decoration: none; }
-    .watch { background: #28a745; }
-    .download { background: #007bff; }
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .series-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .series-card {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+    .series-card h3 {
+      margin-bottom: 10px;
+      color: #00ffff;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px 5px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .btn-watch {
+      background: #00c853;
+      color: white;
+    }
+    .btn-download {
+      background: #2962ff;
+      color: white;
+    }
   </style>
 </head>
 <body>
 
-  <h1>🎬 Boom Flim 2.0</h1>
+  <h2>📺 Boom Flim 2.0</h2>
 
-  <!-- Bachelor Point Season 5 -->
-  <div class="series">
-    <h2>Bachelor Point Season 5</h2>
-    <img src="images/bachelor5.jpg" alt="Bachelor Point Season 5 Poster">
-    <p>📅 Coming on ৩ তারিখ</p>
-    <a href="https://t.me/bachelorpointseason0005" class="btn watch" target="_blank">🔔 Join Telegram</a>
-  </div>
+  <div class="series-container">
+    <!-- Bachelor Point Section -->
+    <div class="series-card">
+      <h3>Bachelor Point Season 5</h3>
+      <p>Episodes: 1 - 120</p>
+      <a class="btn btn-watch" href="#">🎬 Watch All</a>
+      <a class="btn btn-download" href="#">⬇ Download All</a>
+    </div>
 
-  <!-- Myself Allen Shopon with episodes -->
-  <div class="series">
-    <h2>Myself Allen Shopon</h2>
-    <img src="images/myself-allen-shopon.jpg" alt="Myself Allen Shopon Poster">
-
-    <!-- Episode 1 -->
-    <h3>Episode 1</h3>
-    <img src="images/myself-allen-shopon.jpg" alt="Episode 1 Poster">
-    <iframe src="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/preview" width="100%" height="360" allowfullscreen style="border-radius:8px;"></iframe>
-    <br>
-    <a href="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/view?usp=sharing" class="btn watch" target="_blank">▶️ Watch Fullscreen</a>
-    <a href="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/view?usp=sharing" class="btn download" target="_blank">⬇️ Download</a>
-
-    <!-- Episode 2 -->
-    <h3>Episode 2</h3>
-    <img src="images/myself-allen-shopon.jpg" alt="Episode 2 Poster">
-    <iframe src="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/preview" width="100%" height="360" allowfullscreen style="border-radius:8px;"></iframe>
-    <br>
-    <a href="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/view?usp=sharing" class="btn watch" target="_blank">▶️ Watch Fullscreen</a>
-    <a href="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/view?usp=sharing" class="btn download" target="_blank">⬇️ Download</a>
+    <!-- Myself Allen Shopon Section -->
+    <div class="series-card">
+      <h3>Myself Allen Shopon</h3>
+      <p>Episodes: 1 - 2</p>
+      <a class="btn btn-watch" href="#">🎬 Watch All</a>
+      <a class="btn btn-download" href="#">⬇ Download All</a>
+    </div>
   </div>
 
 </body>
 </html>
-
