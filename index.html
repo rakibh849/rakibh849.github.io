@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Boom Flim 2.0</title>
   <style>
     body {
-      background-color: #121212;
+      background-color: #111;
+      color: #fff;
       font-family: Arial, sans-serif;
-      color: white;
-      padding: 20px;
+      text-align: center;
     }
     h1 {
-      color: #ff4d4d;
-      text-align: center;
+      color: #ff5050;
     }
-    .card {
-      background-color: #1f1f1f;
-      border-radius: 10px;
+    .movie {
+      background-color: #222;
       padding: 15px;
-      margin-bottom: 20px;
-      text-align: center;
-      box-shadow: 0 0 10px #000;
+      margin: 20px auto;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
     }
-    .poster {
-      max-width: 100%;
-      height: auto;
-      border-radius: 5px;
+    iframe {
+      width: 100%;
+      height: 220px;
+      border: none;
+      margin-bottom: 10px;
     }
     .btn {
       display: inline-block;
-      padding: 10px 20px;
       margin: 10px 5px;
+      padding: 10px 15px;
       border-radius: 5px;
       text-decoration: none;
+      color: white;
       font-weight: bold;
     }
-    .watch { background-color: #2196f3; color: white; }
-    .download { background-color: #4caf50; color: white; }
-    .trailer { background-color: red; color: white; }
+    .watch {
+      background-color: #00cc66;
+    }
+    .download {
+      background-color: #3366ff;
+    }
   </style>
 </head>
 <body>
@@ -46,29 +49,28 @@
   <h1>🎬 Boom Flim 2.0</h1>
 
   <!-- Bachelor Point Season 5 -->
-  <div class="card">
+  <div class="movie">
     <h2>Bachelor Point Season 5</h2>
-    <img src="https://i.ibb.co/3m7d6Bs/bachelor-point-poster.jpg" alt="Bachelor Point Poster" class="poster">
     <p>Episode 1-120 (2024)</p>
-    <a href="https://drive.google.com/file/d/EXAMPLE_BP5_WATCH" class="btn watch">▶️ Watch Now</a>
-    <a href="https://drive.google.com/file/d/EXAMPLE_BP5_DOWNLOAD" class="btn download">⬇️ Download</a>
+    <a class="download btn" href="https://t.me/bachelorpointseason0005" target="_blank">📥 Download All</a>
   </div>
 
- <!-- Myself Allen Shopon Episode 1 -->
-<div class="card">
-  <h2>Myself Allen Shopon Ep1</h2>
-  <img src="https://i.ibb.co/GJPdHkD/allen-ep1.jpg" alt="Ep1 Poster" class="poster">
-  <p>Episode 1 (2024)</p>
-  <a href="https://www.youtube.com/watch?v=JKdE8LQyy7I" class="btn trailer" target="_blank">▶️ Trailer</a>
-  <a href="https://drive.google.com/file/d/1EXAMPLE_EP1_WATCH/preview" class="btn watch" target="_blank">▶️ Watch Now</a>
-  <a href="https://drive.google.com/u/0/uc?id=1EXAMPLE_EP1_DOWNLOAD&export=download" class="btn download" target="_blank">⬇️ Download</a>
-</div>
+  <!-- Myself Allen Shopon Ep 1 -->
+  <div class="movie">
+    <h3>Myself Allen Shopon Episode 1</h3>
+    <iframe src="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/preview" allow="autoplay"></iframe>
+    <a class="watch btn" href="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/preview" target="_blank">▶️ Watch Now</a>
+    <a class="download btn" href="https://drive.google.com/uc?export=download&id=1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp" target="_blank">📥 Download</a>
+  </div>
 
-<!-- Myself Allen Shopon Episode 2 -->
-<div class="card">
-  <h2>Myself Allen Shopon Ep2</h2>
-  <img src="https://i.ibb.co/f4j0mtX/allen-ep2.jpg" alt="Ep2 Poster" class="poster">
-  <p>Episode 2 (2024)</p>
-  <a href="https://drive.google.com/file/d/1EXAMPLE_EP2_WATCH/preview" class="btn watch" target="_blank">▶️ Watch Now</a>
-  <a href="https://drive.google.com/u/0/uc?id=1EXAMPLE_EP2_DOWNLOAD&export=download" class="btn download" target="_blank">⬇️ Download</a>
-</div>
+  <!-- Myself Allen Shopon Ep 2 -->
+  <div class="movie">
+    <h3>Myself Allen Shopon Episode 2</h3>
+    <iframe src="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/preview" allow="autoplay"></iframe>
+    <a class="watch btn" href="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/preview" target="_blank">▶️ Watch Now</a>
+    <a class="download btn" href="https://drive.google.com/uc?export=download&id=1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow" target="_blank">📥 Download</a>
+  </div>
+
+</body>
+</html>
+
