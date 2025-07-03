@@ -107,12 +107,82 @@
 </div>
 
 <!-- Bachelor Point Section -->
+<!-- 📺 Bachelor Point Season 5 Section -->
 <h2 class="section-title">📺 Bachelor Point Season 5 <span class="coming">(আসছে ১০ তারিখ)</span></h2>
-<div class="episode-grid">
-  <div class="card">
-    <p>Episode 1 - 120</p>
-    <p class="coming">⏳ ৯ থেকে ১৬ এপিসোড খুব শীঘ্রই আসছে! ১ থেকে ৮ এপিসোড টেলিগ্রামে </p>
-  </div>
+
+<!-- 🔍 Search Input -->
+<div style="padding: 0 20px;">
+  <input type="text" id="searchInput" placeholder="🔍 Search episode..." style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
+</div>
+
+<!-- 🔽 Collapsible & Paginated Episodes -->
+<div id="bachelorPointEpisodes" style="padding: 20px;">
+  <!-- Pagination buttons will be inserted here -->
+  <div id="pagination" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;"></div>
+
+  <!-- Episodes Container -->
+  <div id="episodeContainer" class="episode-grid"></div>
+</div>
+
+<!-- 💡 JavaScript Logic -->
+<script>
+  const episodesPerPage = 20;
+  const totalEpisodes = 120;
+  const episodeContainer = document.getElementById("episodeContainer");
+  const pagination = document.getElementById("pagination");
+  const searchInput = document.getElementById("searchInput");
+
+  // Example link template (replace with your own logic)
+  const driveLink = (id) => `https://drive.google.com/file/d/${id}/view?usp=drivesdk`;
+  const downloadLink = (id) => `https://drive.google.com/uc?export=download&id=${id}`;
+
+  // Dummy video IDs for demo (you can replace with actual drive IDs)
+  const videoIds = Array.from({ length: totalEpisodes }, (_, i) => `demo_id_${i + 1}`);
+
+  // Generate all episode cards
+  const generateEpisodes = (start, end, search = "") => {
+    episodeContainer.innerHTML = "";
+    for (let i = start; i <= end && i <= totalEpisodes; i++) {
+      const epText = `Episode ${i}`;
+      if (!epText.toLowerCase().includes(search.toLowerCase())) continue;
+      const card = `
+        <div class="card">
+          <p>${epText}</p>
+          <a class="btn btn-watch" href="${driveLink(videoIds[i - 1])}" target="_blank">▶ Watch</a>
+          <a class="btn btn-download" href="${downloadLink(videoIds[i - 1])}" target="_blank">⬇ Download</a>
+        </div>`;
+      episodeContainer.innerHTML += card;
+    }
+  };
+
+  // Create pagination
+  const setupPagination = () => {
+    pagination.innerHTML = "";
+    const totalPages = Math.ceil(totalEpisodes / episodesPerPage);
+    for (let i = 0; i < totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = `Ep ${i * episodesPerPage + 1}-${(i + 1) * episodesPerPage}`;
+      btn.style.padding = "10px 15px";
+      btn.style.border = "none";
+      btn.style.borderRadius = "6px";
+      btn.style.cursor = "pointer";
+      btn.style.backgroundColor = "#333";
+      btn.style.color = "#fff";
+      btn.onclick = () => generateEpisodes(i * episodesPerPage + 1, (i + 1) * episodesPerPage);
+      pagination.appendChild(btn);
+    }
+  };
+
+  // Search functionality
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim();
+    generateEpisodes(1, totalEpisodes, query);
+  });
+
+  // Init
+  setupPagination();
+  generateEpisodes(1, episodesPerPage);
+</script>
 <!-- Female Natok Section -->
 <h2 class="section-title">🎭 Female Natok</h2>
 <div class="episode-grid">
