@@ -126,20 +126,18 @@
 
 <!-- 💡 JavaScript Logic -->
 <script>
-  const episodesPerPage = 20;
+  const episodesPerPage = 8; // প্রতি পেজে ৮টা এপিসোড
   const totalEpisodes = 120;
   const episodeContainer = document.getElementById("episodeContainer");
   const pagination = document.getElementById("pagination");
   const searchInput = document.getElementById("searchInput");
 
-  // Example link template (replace with your own logic)
+  // Dummy video IDs (তুমি এগুলো তোমার ড্রাইভ ID দিয়ে replace করবে)
+  const videoIds = Array.from({ length: totalEpisodes }, (_, i) => `demo_id_${i + 1}`);
+
   const driveLink = (id) => `https://drive.google.com/file/d/${id}/view?usp=drivesdk`;
   const downloadLink = (id) => `https://drive.google.com/uc?export=download&id=${id}`;
 
-  // Dummy video IDs for demo (you can replace with actual drive IDs)
-  const videoIds = Array.from({ length: totalEpisodes }, (_, i) => `demo_id_${i + 1}`);
-
-  // Generate all episode cards
   const generateEpisodes = (start, end, search = "") => {
     episodeContainer.innerHTML = "";
     for (let i = start; i <= end && i <= totalEpisodes; i++) {
@@ -155,31 +153,31 @@
     }
   };
 
-  // Create pagination
   const setupPagination = () => {
     pagination.innerHTML = "";
     const totalPages = Math.ceil(totalEpisodes / episodesPerPage);
     for (let i = 0; i < totalPages; i++) {
+      const startEp = i * episodesPerPage + 1;
+      const endEp = Math.min((i + 1) * episodesPerPage, totalEpisodes);
+
       const btn = document.createElement("button");
-      btn.textContent = `Ep ${i * episodesPerPage + 1}-${(i + 1) * episodesPerPage}`;
+      btn.textContent = `Ep ${startEp}-${endEp}`;
       btn.style.padding = "10px 15px";
       btn.style.border = "none";
       btn.style.borderRadius = "6px";
       btn.style.cursor = "pointer";
       btn.style.backgroundColor = "#333";
       btn.style.color = "#fff";
-      btn.onclick = () => generateEpisodes(i * episodesPerPage + 1, (i + 1) * episodesPerPage);
+      btn.onclick = () => generateEpisodes(startEp, endEp);
       pagination.appendChild(btn);
     }
   };
 
-  // Search functionality
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.trim();
     generateEpisodes(1, totalEpisodes, query);
   });
 
-  // Init
   setupPagination();
   generateEpisodes(1, episodesPerPage);
 </script>
