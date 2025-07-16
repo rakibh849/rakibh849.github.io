@@ -2,141 +2,124 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
+  <title>UID TopUp Login System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Free Fire UID TopUp – BoomFlim</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #f4f4f4;
-      color: #333;
+    body { font-family: sans-serif; background: #f0f0f0; padding: 20px; }
+    .container { max-width: 480px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #e91e63; }
+    input, select, button {
+      width: 100%; padding: 10px; margin-bottom: 12px;
+      font-size: 16px; border: 1px solid #ccc; border-radius: 5px;
     }
-    header {
-      background: #ff3c6e;
-      color: white;
-      padding: 20px 10px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    header h1 {
-      font-size: 24px;
-    }
-    .container {
-      max-width: 450px;
-      background: #fff;
-      margin: 30px auto;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    label {
-      font-weight: bold;
-      margin-bottom: 5px;
-      display: block;
-    }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    input[type="file"] {
-      background-color: #fafafa;
-    }
-    button {
-      width: 100%;
-      padding: 14px;
-      background: #28a745;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #218838;
-    }
-    .notice {
-      background: #fff9e6;
-      padding: 12px;
-      margin-top: 20px;
-      border-left: 5px solid #ffc107;
-      border-radius: 5px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 13px;
-      color: #777;
-    }
-    footer a {
-      color: #ff3c6e;
-      text-decoration: none;
-    }
+    button { background: #28a745; color: white; border: none; cursor: pointer; }
+    button.logout { background: #dc3545; }
+    .order { background: #f9f9f9; padding: 10px; margin-bottom: 10px; border-left: 4px solid #e91e63; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Free Fire UID টপআপ – BoomFlim</h1>
-  </header>
+<div class="container" id="loginSection">
+  <h2>🔐 লগইন করুন</h2>
+  <input type="text" id="username" placeholder="ইউজারনেম">
+  <input type="password" id="password" placeholder="পাসওয়ার্ড">
+  <button onclick="login()">লগইন</button>
+</div>
 
-  <div class="container">
-    <form>
-      <div class="form-group">
-        <label for="uid">🎮 আপনার ফ্রি ফায়ার UID</label>
-        <input type="text" id="uid" name="uid" placeholder="আপনার ফ্রি ফায়ার UID দিন" required>
-      </div>
+<div class="container" id="appSection" style="display: none;">
+  <h2>💎 UID TopUp Order</h2>
+  <input type="text" id="uid" placeholder="UID লিখুন">
+  <select id="diamond">
+    <option value="">ডায়মন্ড সিলেক্ট করুন</option>
+    <option value="50" data-price="45">50 Diamond – ৳45</option>
+    <option value="115" data-price="85">115 Diamond – ৳85</option>
+    <option value="240" data-price="130">240 Diamond – ৳130</option>
+    <option value="355" data-price="180">355 Diamond – ৳180</option>
+  </select>
+  <button onclick="placeOrder()">✅ অর্ডার করুন</button>
+  <button class="logout" onclick="logout()">🚪 লগআউট</button>
 
-      <div class="form-group">
-        <label for="amount">💎 ডায়মন্ড পরিমাণ</label>
-        <select id="amount" name="amount" required>
-          <option value="">একটি প্যাকেজ সিলেক্ট করুন</option>
-          <option>50 Diamond</option>
-          <option>115 Diamond</option>
-          <option>240 Diamond</option>
-          <option>355 Diamond</option>
-          <option>480 Diamond</option>
-          <option>610 Diamond</option>
-          <option>850 Diamond</option>
-          <option>1090 Diamond</option>
-          <option>1240 Diamond</option>
-        </select>
-      </div>
+  <h3>📃 অর্ডার তালিকা</h3>
+  <div id="orderList"></div>
+</div>
 
-      <div class="form-group">
-        <label for="txn">📱 পেমেন্ট Txn ID</label>
-        <input type="text" id="txn" name="txn" placeholder="Bkash/Nagad/Upay Txn ID দিন" required>
-      </div>
+<script>
+  const correctUsername = "admin";
+  const correctPassword = "1234";
 
-      <div class="form-group">
-        <label for="screenshot">🖼️ পেমেন্ট স্ক্রিনশট</label>
-        <input type="file" id="screenshot" name="screenshot" accept="image/*" required>
-      </div>
+  function login() {
+    const u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+    if (u === correctUsername && p === correctPassword) {
+      localStorage.setItem("loggedIn", "yes");
+      showApp();
+    } else {
+      alert("ইউজারনেম বা পাসওয়ার্ড ভুল!");
+    }
+  }
 
-      <button type="submit">✅ অর্ডার সাবমিট করুন</button>
-    </form>
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    location.reload();
+  }
 
-    <div class="notice">
-      ⚠️ আপনার UID ভুল হলে টপআপ যাবে না।<br>
-      🕐 অর্ডার প্রসেস হতে ৫-১০ মিনিট লাগতে পারে।<br>
-      ☎️ হেল্প লাইন: <strong><a href="https://t.me/boomflim02" target="_blank">@boomflim02</a></strong><br>
-      🔗 টেলিগ্রাম চ্যানেল: <a href="https://t.me/bachelorpointseason0005" target="_blank">bachelorpointseason0005</a>
-    </div>
-  </div>
+  function showApp() {
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("appSection").style.display = "block";
+    renderOrders();
+  }
 
-  <footer>
-    © 2025 BoomFlim | ডিজাইন: ChatGPT ❤<br>
-    Inspired by <a href="https://fixtopup.com" target="_blank">fixtopup.com</a>
-  </footer>
+  function placeOrder() {
+    const uid = document.getElementById("uid").value;
+    const diamondSelect = document.getElementById("diamond");
+    const diamond = diamondSelect.value;
+    const price = diamondSelect.options[diamondSelect.selectedIndex].dataset.price;
+
+    if (!uid || !diamond) {
+      alert("UID ও Diamond সিলেক্ট করুন!");
+      return;
+    }
+
+    const order = {
+      uid: uid,
+      diamond: diamond,
+      total: price,
+      status: "Pending"
+    };
+
+    const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    orders.push(order);
+    localStorage.setItem("orders", JSON.stringify(orders));
+    renderOrders();
+
+    // ফর্ম ক্লিয়ার
+    document.getElementById("uid").value = "";
+    document.getElementById("diamond").selectedIndex = 0;
+  }
+
+  function renderOrders() {
+    const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    const list = document.getElementById("orderList");
+    list.innerHTML = "";
+    orders.forEach((o, i) => {
+      list.innerHTML += `
+        <div class="order">
+          UID: ${o.uid}<br>
+          Diamond: ${o.diamond}<br>
+          Total: ৳${o.total}<br>
+          Status: <strong style="color:orange">${o.status}</strong>
+        </div>
+      `;
+    });
+  }
+
+  // পেজ লোড হলে চেক করব লগড ইন কিনা
+  window.onload = () => {
+    if (localStorage.getItem("loggedIn") === "yes") {
+      showApp();
+    }
+  };
+</script>
 
 </body>
 </html>
