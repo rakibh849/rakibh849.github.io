@@ -2,24 +2,112 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <title>UID TopUp with Signup/Login & Telegram Notify</title>
+  <title>UID TopUp - Email দিয়ে লগইন/সাইন আপ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: sans-serif; background: #f0f0f0; padding: 20px; }
-    .container { max-width: 480px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    h2 { text-align: center; color: #e91e63; }
-    input, select, button {
-      width: 100%; padding: 10px; margin-bottom: 12px;
-      font-size: 16px; border: 1px solid #ccc; border-radius: 5px;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #eee;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
     }
-    button { background: #28a745; color: white; border: none; cursor: pointer; }
-    button.logout { background: #dc3545; }
-    .order { background: #f9f9f9; padding: 10px; margin-bottom: 10px; border-left: 4px solid #e91e63; }
+
+    .container {
+      background: #1e1e1e;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #f50057;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #555;
+      padding: 10px 5px;
+      margin-bottom: 30px;
+      font-size: 16px;
+      color: #eee;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    select:focus {
+      border-bottom-color: #f50057;
+    }
+
+    ::placeholder {
+      color: #bbb;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #f50057;
+      color: white;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #c40048;
+    }
+    button.logout {
+      background: #ff1744;
+      margin-top: 10px;
+    }
+    button.logout:hover {
+      background: #d50036;
+    }
+
     .toggle-link {
-      color: #e91e63; cursor: pointer; text-align: center; display: block; margin-top: -8px; margin-bottom: 20px; text-decoration: underline;
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+      color: #f50057;
+      cursor: pointer;
+      text-decoration: underline;
+      font-weight: 600;
+      user-select: none;
     }
-    .error { color: red; font-size: 14px; margin-bottom: 10px; }
-    #signupSection, #loginSection, #appSection { display: none; }
+
+    .error {
+      color: #ff5252;
+      font-size: 14px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .order {
+      background: #2c2c2c;
+      padding: 12px 15px;
+      border-left: 4px solid #f50057;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      font-size: 15px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
   </style>
 </head>
 <body>
@@ -27,7 +115,7 @@
 <div class="container" id="signupSection">
   <h2>নতুন ইউজার রেজিস্ট্রেশন</h2>
   <div id="signupError" class="error"></div>
-  <input type="text" id="signupUsername" placeholder="ইউজারনেম লিখুন" />
+  <input type="email" id="signupEmail" placeholder="ইমেইল লিখুন" />
   <input type="password" id="signupPassword" placeholder="পাসওয়ার্ড লিখুন" />
   <button onclick="signup()">সাইন আপ করুন</button>
   <span class="toggle-link" onclick="showLogin()">আগে থেকে একাউন্ট আছে? লগইন করুন</span>
@@ -36,7 +124,7 @@
 <div class="container" id="loginSection">
   <h2>লগইন করুন</h2>
   <div id="loginError" class="error"></div>
-  <input type="text" id="loginUsername" placeholder="ইউজারনেম" />
+  <input type="email" id="loginEmail" placeholder="ইমেইল" />
   <input type="password" id="loginPassword" placeholder="পাসওয়ার্ড" />
   <button onclick="login()">লগইন</button>
   <span class="toggle-link" onclick="showSignup()">নতুন ইউজার? সাইন আপ করুন</span>
@@ -61,11 +149,9 @@
 </div>
 
 <script>
-  // আপনার Bot Token এবং Chat ID (এখানে বসানো হয়েছে)
   const BOT_TOKEN = "7975966275:AAGr5XpeBkZAX63OBREGZ6LpkHERMm3ee7g";
   const CHAT_ID = "7356214087";
 
-  // Show/hide sections
   function showSignup() {
     clearErrors();
     document.getElementById("signupSection").style.display = "block";
@@ -90,57 +176,64 @@
     document.getElementById("loginError").textContent = "";
   }
 
-  // Signup
   function signup() {
     clearErrors();
-    const username = document.getElementById("signupUsername").value.trim();
+    const email = document.getElementById("signupEmail").value.trim().toLowerCase();
     const password = document.getElementById("signupPassword").value.trim();
 
-    if (!username || !password) {
+    if (!email || !password) {
       document.getElementById("signupError").textContent = "সব ঘর পূরণ করুন।";
       return;
     }
 
-    let users = JSON.parse(localStorage.getItem("users") || "{}");
-    if (users[username]) {
-      document.getElementById("signupError").textContent = "ইউজারনেম ইতিমধ্যে ব্যবহৃত হচ্ছে।";
+    // ইমেইল সিম্পল ভ্যালিডেশন
+    if (!validateEmail(email)) {
+      document.getElementById("signupError").textContent = "সঠিক ইমেইল লিখুন।";
       return;
     }
 
-    users[username] = password;
+    let users = JSON.parse(localStorage.getItem("users") || "{}");
+    if (users[email]) {
+      document.getElementById("signupError").textContent = "এই ইমেইল দিয়ে আগে থেকেই রেজিস্ট্রেশন আছে।";
+      return;
+    }
+
+    users[email] = password;
     localStorage.setItem("users", JSON.stringify(users));
     alert("রেজিস্ট্রেশন সম্পন্ন! এখন লগইন করুন।");
     showLogin();
   }
 
-  // Login
   function login() {
     clearErrors();
-    const username = document.getElementById("loginUsername").value.trim();
+    const email = document.getElementById("loginEmail").value.trim().toLowerCase();
     const password = document.getElementById("loginPassword").value.trim();
 
-    if (!username || !password) {
+    if (!email || !password) {
       document.getElementById("loginError").textContent = "সব ঘর পূরণ করুন।";
       return;
     }
 
-    let users = JSON.parse(localStorage.getItem("users") || "{}");
-    if (!users[username] || users[username] !== password) {
-      document.getElementById("loginError").textContent = "ইউজারনেম বা পাসওয়ার্ড ভুল।";
+    if (!validateEmail(email)) {
+      document.getElementById("loginError").textContent = "সঠিক ইমেইল লিখুন।";
       return;
     }
 
-    localStorage.setItem("loggedInUser", username);
+    let users = JSON.parse(localStorage.getItem("users") || "{}");
+    if (!users[email] || users[email] !== password) {
+      document.getElementById("loginError").textContent = "ইমেইল বা পাসওয়ার্ড ভুল।";
+      return;
+    }
+
+    localStorage.setItem("loggedInUser", email);
     showApp();
   }
 
-  // Logout
   function logout() {
     localStorage.removeItem("loggedInUser");
     location.reload();
   }
 
-  // Place Order and send Telegram message
   function placeOrder() {
     const uid = document.getElementById("uid").value.trim();
     const txn = document.getElementById("txn").value.trim();
@@ -170,10 +263,9 @@
     localStorage.setItem("orders", JSON.stringify(orders));
     renderOrders();
 
-    // Send message to Telegram
     const message = 
       `নতুন অর্ডার:\n` +
-      `User: ${currentUser}\n` +
+      `User Email: ${currentUser}\n` +
       `UID: ${uid}\n` +
       `Txn ID: ${txn}\n` +
       `Diamond: ${diamond}\n` +
@@ -196,7 +288,6 @@
       .catch(() => alert("ইন্টারনেট সমস্যা বা Telegram API তে সমস্যা হয়েছে।"));
   }
 
-  // Render orders for logged in user
   function renderOrders() {
     const orders = JSON.parse(localStorage.getItem("orders") || "[]");
     const currentUser = localStorage.getItem("loggedInUser");
@@ -223,7 +314,12 @@
     });
   }
 
-  // On page load check login status
+  function validateEmail(email) {
+    // সিম্পল ইমেইল ভ্যালিডেশন Regex
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
   window.onload = function() {
     if(localStorage.getItem("loggedInUser")){
       showApp();
