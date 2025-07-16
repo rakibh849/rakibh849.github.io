@@ -1,284 +1,161 @@
-<div class="top-bar">
-
-  <a class="telegram-btn" style="margin-left: 10px; background-color: #28a745;" href="https://t.me/boomflim02" target="_blank">📞 Help Line</a>
-  <a class="telegram-btn" style="margin-left: 10px; background-color: #ff0000;" href="https://youtube.com/@boomflim2.0?si=4X-8QsbnEX5JAEwB" target="_blank">🎬 YouTube Channel</a>
-</div>
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Boom Flim 2.0</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free Fire Top-Up</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
       margin: 0;
       padding: 0;
-      background-color: #141414;
-      font-family: 'Poppins', sans-serif;
-      color: #fff;
     }
 
-    .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      padding: 20px;
-      background-color: #000;
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    .telegram-btn {
-      background: #229ED9;
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 30px;
-      text-decoration: none;
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
       font-weight: bold;
-      transition: 0.3s ease;
+      color: #555;
     }
 
-    .telegram-btn:hover {
-      background: #00cfff;
-    }
-
-    .section-title {
-      font-size: 24px;
-      color: #00ffe1;
-      margin: 30px 20px 10px;
-    }
-
-    .episode-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid #333;
-      padding: 15px;
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .card p {
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
       font-size: 16px;
-      font-weight: 600;
-      margin: 10px 0 8px;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 8px 14px;
-      margin: 5px 5px 0 0;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 14px;
-      text-decoration: none;
-      color: #fff;
-      transition: 0.3s;
-    }
-
-    .btn-watch {
+    button {
       background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
     }
 
-    .btn-download {
-      background-color: #007bff;
+    button:hover {
+      background-color: #218838;
     }
 
-    .coming {
-      color: yellow;
-      font-style: italic;
+    .payment-info {
+      margin-top: 30px;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      color: #444;
+    }
+
+    .payment-info h3 {
+      margin-top: 0;
+    }
+
+    .payment-info ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .payment-info ul li {
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .contact {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .contact a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h2>Free Fire Top-Up</h2>
 
-<!-- Top Telegram Button -->
-<div class="top-bar">
-  <a class="telegram-btn" href="https://t.me/bachelorpointseason0005" target="_blank">📢 Join Telegram Channel</a>
-</div>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <label for="player_id">🔢 Player ID:</label>
+      <input type="text" id="player_id" name="player_id" placeholder="আপনার Free Fire ID দিন" required />
 
-<!-- Bachelor Point Section -->
-<!-- 📺 Bachelor Point Season 5 Section -->
-<h2 class="section-title">📺 Bachelor Point Season 5 <span class="coming">(আসছে ১০ তারিখ)</span></h2>
-<!-- 🔍 Search Input -->
-<div style="padding: 0 20px;">
-  <input type="text" id="searchInput" placeholder="🔍 Search episode..." style="width: 100%; padding: 10px; border-radius: 8px; border: none; font-size: 16px;">
-</div>
+      <label for="diamond_package">💎 Diamond Package নির্বাচন করুন:</label>
+      <select id="diamond_package" name="diamond_package" required>
+        <option value="">-- প্যাকেজ নির্বাচন করুন --</option>
+        <option value="25 Diamonds - 22৳">25 Diamonds - 22৳</option>
+        <option value="50 Diamonds - 37৳">50 Diamonds - 37৳</option>
+        <option value="115 Diamonds - 80৳">115 Diamonds - 80৳</option>
+        <option value="240 Diamonds - 155৳">240 Diamonds - 155৳</option>
+        <option value="355 Diamonds - 230৳">355 Diamonds - 230৳</option>
+        <option value="480 Diamonds - 308৳">480 Diamonds - 308৳</option>
+        <option value="505 Diamonds - 330৳">505 Diamonds - 330৳</option>
+        <option value="610 Diamonds - 385৳">610 Diamonds - 385৳</option>
+        <option value="725 Diamonds - 459৳">725 Diamonds - 459৳</option>
+        <option value="850 Diamonds - 537৳">850 Diamonds - 537৳</option>
+        <option value="1090 Diamonds - 690৳">1090 Diamonds - 690৳</option>
+        <option value="1240 Diamonds - 755৳">1240 Diamonds - 755৳</option>
+        <option value="1480 Diamonds - 910৳">1480 Diamonds - 910৳</option>
+        <option value="1720 Diamonds - 1055৳">1720 Diamonds - 1055৳</option>
+        <option value="1850 Diamonds - 1140৳">1850 Diamonds - 1140৳</option>
+        <option value="2090 Diamonds - 1290৳">2090 Diamonds - 1290৳</option>
+        <option value="2530 Diamonds - 1540৳">2530 Diamonds - 1540৳</option>
+        <option value="3140 Diamonds - 1915৳">3140 Diamonds - 1915৳</option>
+        <option value="5060 Diamonds - 3055৳">5060 Diamonds - 3055৳</option>
+        <option value="Weekly Membership - 158৳">Weekly Membership - 158৳</option>
+        <option value="Weekly Lite - 45৳">Weekly Lite - 45৳</option>
+        <option value="Monthly Membership - 765৳">Monthly Membership - 765৳</option>
+        <option value="Level Up Pass Full (1270💎) - 410৳">Level Up Pass Full (1270💎) - 410৳</option>
+      </select>
 
+      <label for="bkash_number">📱 Bkash নাম্বার (যে নাম্বার থেকে টাকা পাঠানো হবে):</label>
+      <input type="text" id="bkash_number" name="bkash_number" placeholder="01XXXXXXXXX" required />
 
-<!-- 🔽 Collapsible & Paginated Episodes -->
-<div id="bachelorPointEpisodes" style="padding: 20px;">
-  <!-- Pagination buttons will be inserted here -->
-  <div id="pagination" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;"></div>
+      <label for="transaction_id">📝 Transaction ID দিন:</label>
+      <input type="text" id="transaction_id" name="transaction_id" placeholder="Bkash Transaction ID" required />
 
-  <!-- Episodes Container -->
-  <div id="episodeContainer" class="episode-grid"></div>
-</div>
+      <button type="submit">🚀 Submit করুন</button>
+    </form>
 
-<!-- 💡 JavaScript Logic -->
-<script>
-  const episodesPerPage = 8; // প্রতি পেজে ৮টা এপিসোড
-  const totalEpisodes = 120;
-  const episodeContainer = document.getElementById("episodeContainer");
-  const pagination = document.getElementById("pagination");
-  const searchInput = document.getElementById("searchInput");
+    <div class="payment-info">
+      <h3>📱 পেমেন্ট নাম্বার (Bkash):</h3>
+      <p>টাকা পাঠানোর জন্য নিচের নাম্বারগুলো ব্যবহার করুনঃ</p>
+      <ul>
+        <li>01987553830</li>
+        <li>01644105791</li>
+      </ul>
+      <p><strong>দ্রষ্টব্য:</strong> টাকা পাঠানোর পর অবশ্যই Transaction ID ফর্মে দিন।</p>
+    </div>
 
-  // Dummy video IDs (তুমি এগুলো তোমার ড্রাইভ ID দিয়ে replace করবে)
-  const videoIds = Array.from({ length: totalEpisodes }, (_, i) => `demo_id_${i + 1}`);
-
-  const driveLink = (id) => `https://drive.google.com/file/d/${id}/view?usp=drivesdk`;
-  const downloadLink = (id) => `https://drive.google.com/uc?export=download&id=${id}`;
-
-  const generateEpisodes = (start, end, search = "") => {
-    episodeContainer.innerHTML = "";
-    for (let i = start; i <= end && i <= totalEpisodes; i++) {
-      const epText = `Episode ${i}`;
-      if (!epText.toLowerCase().includes(search.toLowerCase())) continue;
-      const card = `
-        <div class="card">
-          <p>${epText}</p>
-          <a class="btn btn-watch" href="${driveLink(videoIds[i - 1])}" target="_blank">▶ Watch</a>
-          <a class="btn btn-download" href="${downloadLink(videoIds[i - 1])}" target="_blank">⬇ Download</a>
-        </div>`;
-      episodeContainer.innerHTML += card;
-    }
-  };
-
-  const setupPagination = () => {
-    pagination.innerHTML = "";
-    const totalPages = Math.ceil(totalEpisodes / episodesPerPage);
-    for (let i = 0; i < totalPages; i++) {
-      const startEp = i * episodesPerPage + 1;
-      const endEp = Math.min((i + 1) * episodesPerPage, totalEpisodes);
-
-      const btn = document.createElement("button");
-      btn.textContent = `Ep ${startEp}-${endEp}`;
-      btn.style.padding = "10px 15px";
-      btn.style.border = "none";
-      btn.style.borderRadius = "6px";
-      btn.style.cursor = "pointer";
-      btn.style.backgroundColor = "#333";
-      btn.style.color = "#fff";
-      btn.onclick = () => generateEpisodes(startEp, endEp);
-      pagination.appendChild(btn);
-    }
-  };
-
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim();
-    generateEpisodes(1, totalEpisodes, query);
-  });
-
-  setupPagination();
-  generateEpisodes(1, episodesPerPage);
-</script>
-<!-- Female Natok Section -->
-<h2 class="section-title">🎭 Female Natok</h2>
-<div class="episode-grid">
-
-  <div class="card">
-    <p>Female 1</p>
-    <a class="btn btn-watch" href="https://youtu.be/y__lP74Sknc?si=BLQb8ctJn8kymPQm" target="_blank">▶ Watch</a>
-    <!-- ডাউনলোড লিংক নেই, তাই বাদ -->
+    <div class="contact">
+      📞 যেকোনো সমস্যা বা সাহায্যের জন্য WhatsApp করুন: <br />
+      <a href="https://wa.me/8801XXXXXXXXX" target="_blank">+8801XXXXXXXXX</a> <br />
+      অথবা আমাদের Facebook পেজে মেসেজ দিন!
+    </div>
   </div>
-
-  <div class="card">
-    <p>Female 2</p>
-    <a class="btn btn-watch" href="https://youtu.be/HgQyaoXaSEQ?si=aToQploSugM8ZFB7" target="_blank">▶ Watch</a>
-  </div>
-
-  <div class="card">
-    <p>Female 3</p>
-    <a class="btn btn-watch" href="https://youtu.be/আপনার_Youtube_ভিডিও_লিংক_এখানে" target="_blank">▶ Watch</a>
-    <!-- ডাউনলোড লিংক নেই, তাই বাদ -->
-  </div>
-
-  <div class="card">
-    <p>Female 4</p>
-    <a class="btn btn-watch" href="https://drive.google.com/file/d/1Syvk7dHFaX4aURR9ecNnVXLBE_QJLxX8/view?usp=drivesdk" target="_blank">▶ Watch</a>
-    <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1Syvk7dHFaX4aURR9ecNnVXLBE_QJLxX8" target="_blank">⬇ Download</a>
-  </div>
-
-</div>
-<!-- Myself Allen Shopon Section --> 
-  
-<h2 class="section-title">🎬 Myself Allen Shopon</h2>
-<div class="episode-grid">
-
-  <div class="card">
- <p>Episode 1</p>
-  <a class="btn btn-watch" href="https://drive.google.com/file/d/1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp/view?usp=drivesdk" target="_blank">▶ Watch</a>
-  <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1mAf_YP3Ao9uclUk4rUDK7vByWyg2pQPp" target="_blank">⬇ Download</a>
-</div>
-
-  <div class="card">
-    <p>Episode 2</p>
-    <a class="btn btn-watch" href="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/view?usp=drivesdk" target="_blank">▶ Watch</a>
-    <a class="btn btn-download" href="https://drive.google.com/file/d/1uRiq6jPLBhBZYhuDs1xQGr_EQ_OgrBow/view?usp=drivesdk" target="_blank">⬇ Download</a>
-  </div>
-
-  <div class="card">
-    <p>Episode 3</p>
-    <a class="btn btn-watch" href="https://drive.google.com/file/d/1DSYqRTQf3Zlmqd6OdkywGlFVKDcpm6En/view?usp=drivesdk" target="_blank">▶ Watch</a>
-    <a class="btn btn-download" href="https://drive.google.com/file/d/1DSYqRTQf3Zlmqd6OdkywGlFVKDcpm6En/view?usp=drivesdk" target="_blank">⬇ Download</a>
-  </div>
-
-  <div class="card">
-    <p>Episode 4</p>
-    <a class="btn btn-watch" href="https://drive.google.com/file/d/1pUDWLLA0-OS7Ri7ksEdC8t7wYzf8R3iO/view?usp=drivesdk" target="_blank">▶ Watch</a>
-    <a class="btn btn-download" href="https://drive.google.com/file/d/1pUDWLLA0-OS7Ri7ksEdC8t7wYzf8R3iO/view?usp=drivesdk" target="_blank">⬇ Download</a>
-  </div>
-
-  <div class="card">
-    <p>Episode 5</p>
-    <a class="btn btn-watch" href="https://drive.google.com/file/d/1cR5Lbw4YBW_8K2LD_UwKjAFtmq_9AojK/view?usp=drivesdk" target="_blank">▶ Watch</a>
-    <a class="btn btn-download" href="https://drive.google.com/file/d/1cR5Lbw4YBW_8K2LD_UwKjAFtmq_9AojK/view?usp=drivesdk" target="_blank">⬇ Download</a>
-  </div>
-
-  <div class="card">
-    <p>Episode 6</p>
-    <a class="btn btn-watch" href="https://drive.google.com/file/d/1dOEIK0TwSCWxe8qNGd55RmnrMDuyTLQW/view?usp=drivesdk" target="_blank">▶ Watch</a>
-    <a class="btn btn-download" href="https://drive.google.com/file/d/1dOEIK0TwSCWxe8qNGd55RmnrMDuyTLQW/view?usp=drivesdk" target="_blank">⬇ Download</a>
-  </div>
-
-    <!-- Episode 7 -->
-  <div class="card">
-    <p>Episode 7</p>
-    <a class="btn btn-watch" href="https://drive.google.com/file/d/1ApnseIxEJyWjxa0ysAE5mFYtXs7RO7Hk/view?usp=drivesdk" target="_blank">▶ Watch</a>
-    <a class="btn btn-download" href="https://drive.google.com/file/d/1ApnseIxEJyWjxa0ysAE5mFYtXs7RO7Hk/view?usp=drivesdk" target="_blank">⬇ Download</a>
-  </div>
-
-  <!-- Movie Section -->
-<h2 class="section-title">🎥 Movie Section</h2>
-<div class="episode-grid">
-
-  <!-- Golmaal Again Movie -->
-  <div class="card">
-    <p>🎬 Golmaal Again</p>
-    <span style="background-color: crimson; padding: 4px 8px; border-radius: 5px; font-size: 12px;">Hindi Dubbed</span><br><br>
-    <a class="btn btn-watch" href="https://youtu.be/0v4Hbf0nl6E?si=aYay061dIZT2mT_7" target="_blank">▶ Watch Now</a>
-  </div>
-
-</div>  <!-- Tandob Movie -->
-  <div class="card">
-    <p>🎬 Tandob</p>
-    <span style="background-color: orange; padding: 4px 8px; border-radius: 5px; font-size: 12px;">Bangla</span><br><br>
-    <a class="btn btn-watch" href="https://drive.google.com/file/d/1EHoI5R0q9Q8_gI5R0xOumpH2sUM_b6vF/view?usp=drivesdk" target="_blank">▶ Watch Now</a>
-    <a class="btn btn-download" href="https://drive.google.com/file/d/1EHoI5R0q9Q8_gI5R0xOumpH2sUM_b6vF/view?usp=drivesdk" target="_blank">⬇ Download</a>
-  </div>
-  <!-- Housefull 3 Movie -->
-<div class="card">
-  <p>🎬 Housefull 3</p>
-  <span style="background-color: crimson; padding: 4px 8px; border-radius: 5px; font-size: 12px;">HD</span><br><br>
-  <a class="btn btn-watch" href="https://youtu.be/UMe0mz7kRr0?si=5dT9pkeEn6E7nE2A" target="_blank">▶ Watch Now</a>
-  <!-- ডাউনলোড লিংক নেই, তাই বাদ রাখা হয়েছে -->
-</div>
+</body>
+</html>
