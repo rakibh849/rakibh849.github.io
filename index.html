@@ -2,190 +2,91 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
+  <title>UID Topup Order</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UID Topup BD</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
+    body { font-family: Arial; background: #f5f5f5; padding: 20px; }
+    .container { background: white; padding: 20px; max-width: 400px; margin: auto; border-radius: 10px; }
+    h2 { text-align: center; color: #333; }
+    label { display: block; margin-top: 15px; }
+    input, select, button {
+      width: 100%; padding: 10px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 5px;
     }
-    header {
-      background: #0d47a1;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .container {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .section-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .diamond-option {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .diamond-option label {
-      flex: 1 1 45%;
-      background: #e3f2fd;
-      padding: 10px;
-      border: 2px solid #90caf9;
-      border-radius: 5px;
-      cursor: pointer;
-      text-align: center;
-    }
-    .diamond-option input {
-      display: none;
-    }
-    .diamond-option input:checked + label {
-      background: #1976d2;
-      color: white;
-      border-color: #0d47a1;
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .payment-methods {
-      display: flex;
-      justify-content: space-around;
-      margin: 20px 0;
-    }
-    .payment-methods label {
-      background: #eeeeee;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      border: 2px solid transparent;
-    }
-    .payment-methods input {
-      display: none;
-    }
-    .payment-methods input:checked + label {
-      border-color: #43a047;
-      background: #c8e6c9;
-    }
-    .buy-btn {
-      width: 100%;
-      padding: 12px;
-      background: #0d47a1;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .price-display {
-      margin: 10px 0;
-      font-weight: bold;
-      color: #e53935;
-    }
-    .copy-btn {
-      margin-left: 10px;
-      padding: 4px 8px;
-      background: #4caf50;
-      border: none;
-      color: white;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .copy-btn:hover {
-      background: #388e3c;
-    }
+    button { background: #007bff; color: white; font-size: 16px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .copy-btn { background: #4caf50; color: white; margin-top: 5px; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; }
   </style>
 </head>
 <body>
 
-<header>💎 UID TOPUP BD SERVER</header>
-
 <div class="container">
-  <div class="section-title">1️⃣ Select Recharge</div>
-  <div class="diamond-option">
-    <input type="radio" name="diamond" id="d25" value="22"><label for="d25">25 Diamond<br>৳22</label>
-    <input type="radio" name="diamond" id="d50" value="37"><label for="d50">50 Diamond<br>৳37</label>
-    <input type="radio" name="diamond" id="d115" value="76"><label for="d115">115 Diamond<br>৳76</label>
-    <input type="radio" name="diamond" id="d240" value="151"><label for="d240">240 Diamond<br>৳151</label>
-    <input type="radio" name="diamond" id="d355" value="227"><label for="d355">355 Diamond<br>৳227</label>
-    <input type="radio" name="diamond" id="d480" value="302"><label for="d480">480 Diamond<br>৳302</label>
-  </div>
+  <h2>UID TOPUP অর্ডার</h2>
 
-  <div class="section-title">2️⃣ Player UID দিন</div>
-  <input type="text" id="uid" placeholder="Player UID লিখুন" />
+  <label>📱 UID লিখুন:</label>
+  <input type="text" id="uid" placeholder="UID দিন" />
 
-  <div class="section-title">3️⃣ পেমেন্ট পদ্ধতি</div>
-  <div class="payment-methods">
-    <input type="radio" name="payment" id="wallet" checked><label for="wallet">Wallet</label>
-    <input type="radio" name="payment" id="auto"><label for="auto">Auto Pay</label>
-  </div>
+  <label>💎 Diamond সিলেক্ট করুন:</label>
+  <select id="diamond">
+    <option value="">সিলেক্ট করুন</option>
+    <option value="25|22">25 Diamond – ৳22</option>
+    <option value="50|37">50 Diamond – ৳37</option>
+    <option value="115|76">115 Diamond – ৳76</option>
+    <option value="240|151">240 Diamond – ৳151</option>
+  </select>
 
-  <div class="section-title">📱 bKash নম্বরে পেমেন্ট করুন</div>
-  <div style="margin-bottom: 20px;">
-    🔹 bKash Personal: <strong id="bkash1">01987553830</strong> 
-    <button class="copy-btn" onclick="copyToClipboard('bkash1')">📋 কপি</button><br><br>
-    🔹 bKash Personal: <strong id="bkash2">01644105791</strong> 
-    <button class="copy-btn" onclick="copyToClipboard('bkash2')">📋 কপি</button>
-  </div>
+  <label>🧾 bKash Txn ID লিখুন:</label>
+  <input type="text" id="txn" placeholder="Transaction ID" />
 
-  <div class="section-title">🧾 Transaction ID (Txn ID)</div>
-  <input type="text" id="txn" placeholder="bKash থেকে পাওয়া Txn ID লিখুন" />
+  <label>📞 bKash নাম্বার কপি করুন:</label>
+  <p>
+    01987553830 <button class="copy-btn" onclick="copyNumber('01987553830')">কপি</button><br>
+    01644105791 <button class="copy-btn" onclick="copyNumber('01644105791')">কপি</button>
+  </p>
 
-  <div class="price-display" id="priceDisplay">মূল্য: ৳0</div>
-
-  <button class="buy-btn" onclick="buyNow()">✅ BUY NOW</button>
+  <button onclick="placeOrder()">✅ Buy Now</button>
 </div>
 
 <script>
-  const diamonds = document.querySelectorAll('input[name="diamond"]');
-  const priceDisplay = document.getElementById('priceDisplay');
+  const BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN";  // ✅ তোমার Bot Token বসাও
+  const CHAT_ID = "YOUR_TELEGRAM_CHAT_ID";      // ✅ তোমার Telegram Chat ID বসাও
 
-  diamonds.forEach((radio) => {
-    radio.addEventListener('change', () => {
-      priceDisplay.textContent = `মূল্য: ৳${radio.value}`;
-    });
-  });
-
-  function copyToClipboard(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      alert("✅ কপি হয়েছে: " + text);
-    }).catch(() => {
-      alert("❌ কপি করতে সমস্যা হয়েছে!");
-    });
+  function copyNumber(number) {
+    navigator.clipboard.writeText(number);
+    alert("কপি হয়েছে: " + number);
   }
 
-  function buyNow() {
-    const selected = document.querySelector('input[name="diamond"]:checked');
-    const uid = document.getElementById('uid').value.trim();
-    const txn = document.getElementById('txn').value.trim();
-    const payMethod = document.querySelector('input[name="payment"]:checked').id;
+  function placeOrder() {
+    const uid = document.getElementById("uid").value.trim();
+    const diamond = document.getElementById("diamond").value;
+    const txn = document.getElementById("txn").value.trim();
 
-    if (!selected || uid === '' || txn === '') {
-      alert("⚠️ Diamond, UID এবং Txn ID পূরণ করুন!");
+    if (!uid || !diamond || !txn) {
+      alert("⚠️ সব ঘর পূরণ করুন!");
       return;
     }
 
-    alert(
-      `✅ অর্ডার সফল!\n` +
-      `UID: ${uid}\n` +
-      `Diamond: ${selected.nextElementSibling.innerText}\n` +
-      `Txn ID: ${txn}\n` +
-      `পেমেন্ট মেথড: ${payMethod}`
-    );
+    const [diamondQty, price] = diamond.split("|");
+
+    const message = `🔔 নতুন UID TOPUP অর্ডার\n\n🧑‍💻 UID: ${uid}\n💎 Diamond: ${diamondQty}\n৳ মূল্য: ${price} টাকা\n🔁 Txn ID: ${txn}\n🕒 সময়: ${new Date().toLocaleString("bn-BD")}`;
+
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+
+    fetch(url)
+      .then(res => {
+        if (res.ok) {
+          alert("✅ অর্ডার সফলভাবে দেওয়া হয়েছে!");
+          document.getElementById("uid").value = "";
+          document.getElementById("diamond").value = "";
+          document.getElementById("txn").value = "";
+        } else {
+          alert("❌ Telegram API তে সমস্যা হয়েছে!");
+        }
+      })
+      .catch(err => {
+        alert("❌ ইন্টারনেট বা Telegram API সমস্যা!");
+        console.error(err);
+      });
   }
 </script>
 
