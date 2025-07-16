@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <title>UID TopUp Login System</title>
+  <title>SignUp/Login/Logout + UID TopUp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body { font-family: sans-serif; background: #f0f0f0; padding: 20px; }
@@ -15,20 +15,36 @@
     button { background: #28a745; color: white; border: none; cursor: pointer; }
     button.logout { background: #dc3545; }
     .order { background: #f9f9f9; padding: 10px; margin-bottom: 10px; border-left: 4px solid #e91e63; }
+    .toggle-link {
+      color: #e91e63; cursor: pointer; text-align: center; display: block; margin-top: -8px; margin-bottom: 20px; text-decoration: underline;
+    }
+    .error { color: red; font-size: 14px; margin-bottom: 10px; }
+    #signupSection, #loginSection, #appSection { display: none; }
   </style>
 </head>
 <body>
 
-<div class="container" id="loginSection">
-  <h2>🔐 লগইন করুন</h2>
-  <input type="text" id="username" placeholder="ইউজারনেম">
-  <input type="password" id="password" placeholder="পাসওয়ার্ড">
-  <button onclick="login()">লগইন</button>
+<div class="container" id="signupSection">
+  <h2>নতুন ইউজার রেজিস্ট্রেশন</h2>
+  <div id="signupError" class="error"></div>
+  <input type="text" id="signupUsername" placeholder="ইউজারনেম লিখুন" />
+  <input type="password" id="signupPassword" placeholder="পাসওয়ার্ড লিখুন" />
+  <button onclick="signup()">সাইন আপ করুন</button>
+  <span class="toggle-link" onclick="showLogin()">আগে থেকে একাউন্ট আছে? লগইন করুন</span>
 </div>
 
-<div class="container" id="appSection" style="display: none;">
+<div class="container" id="loginSection">
+  <h2>লগইন করুন</h2>
+  <div id="loginError" class="error"></div>
+  <input type="text" id="loginUsername" placeholder="ইউজারনেম" />
+  <input type="password" id="loginPassword" placeholder="পাসওয়ার্ড" />
+  <button onclick="login()">লগইন</button>
+  <span class="toggle-link" onclick="showSignup()">নতুন ইউজার? সাইন আপ করুন</span>
+</div>
+
+<div class="container" id="appSection">
   <h2>💎 UID TopUp Order</h2>
-  <input type="text" id="uid" placeholder="UID লিখুন">
+  <input type="text" id="uid" placeholder="UID লিখুন" />
   <select id="diamond">
     <option value="">ডায়মন্ড সিলেক্ট করুন</option>
     <option value="50" data-price="45">50 Diamond – ৳45</option>
@@ -39,86 +55,149 @@
   <button onclick="placeOrder()">✅ অর্ডার করুন</button>
   <button class="logout" onclick="logout()">🚪 লগআউট</button>
 
-  <h3>📃 অর্ডার তালিকা</h3>
+  <h3>📃 আপনার অর্ডার তালিকা</h3>
   <div id="orderList"></div>
 </div>
 
 <script>
-  const correctUsername = "admin";
-  const correctPassword = "1234";
-
-  function login() {
-    const u = document.getElementById("username").value;
-    const p = document.getElementById("password").value;
-    if (u === correctUsername && p === correctPassword) {
-      localStorage.setItem("loggedIn", "yes");
-      showApp();
-    } else {
-      alert("ইউজারনেম বা পাসওয়ার্ড ভুল!");
-    }
+  // প্রথমে কোন সেকশন দেখাবো সেটিং
+  function showSignup() {
+    clearErrors();
+    document.getElementById("signupSection").style.display = "block";
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("appSection").style.display = "none";
   }
-
-  function logout() {
-    localStorage.removeItem("loggedIn");
-    location.reload();
+  function showLogin() {
+    clearErrors();
+    document.getElementById("signupSection").style.display = "none";
+    document.getElementById("loginSection").style.display = "block";
+    document.getElementById("appSection").style.display = "none";
   }
-
   function showApp() {
+    clearErrors();
+    document.getElementById("signupSection").style.display = "none";
     document.getElementById("loginSection").style.display = "none";
     document.getElementById("appSection").style.display = "block";
     renderOrders();
   }
+  function clearErrors() {
+    document.getElementById("signupError").textContent = "";
+    document.getElementById("loginError").textContent = "";
+  }
 
+  // Sign Up
+  function signup() {
+    clearErrors();
+    const username = document.getElementById("signupUsername").value.trim();
+    const password = document.getElementById("signupPassword").value.trim();
+
+    if (!username || !password) {
+      document.getElementById("signupError").textContent = "সব ঘর পূরণ করুন।";
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users") || "{}");
+    if (users[username]) {
+      document.getElementById("signupError").textContent = "ইউজারনেম ইতিমধ্যে ব্যবহৃত হচ্ছে।";
+      return;
+    }
+
+    users[username] = password;
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("রেজিস্ট্রেশন সম্পন্ন! এখন লগইন করুন।");
+    showLogin();
+  }
+
+  // Login
+  function login() {
+    clearErrors();
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+
+    if (!username || !password) {
+      document.getElementById("loginError").textContent = "সব ঘর পূরণ করুন।";
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users") || "{}");
+    if (!users[username] || users[username] !== password) {
+      document.getElementById("loginError").textContent = "ইউজারনেম বা পাসওয়ার্ড ভুল।";
+      return;
+    }
+
+    localStorage.setItem("loggedInUser", username);
+    showApp();
+  }
+
+  // Logout
+  function logout() {
+    localStorage.removeItem("loggedInUser");
+    location.reload();
+  }
+
+  // Place Order
   function placeOrder() {
-    const uid = document.getElementById("uid").value;
+    const uid = document.getElementById("uid").value.trim();
     const diamondSelect = document.getElementById("diamond");
     const diamond = diamondSelect.value;
     const price = diamondSelect.options[diamondSelect.selectedIndex].dataset.price;
 
     if (!uid || !diamond) {
-      alert("UID ও Diamond সিলেক্ট করুন!");
+      alert("UID ও ডায়মন্ড সিলেক্ট করুন!");
       return;
     }
 
-    const order = {
-      uid: uid,
-      diamond: diamond,
-      total: price,
-      status: "Pending"
-    };
-
     const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-    orders.push(order);
+    orders.push({
+      uid,
+      diamond,
+      total: price,
+      status: "Pending",
+      user: localStorage.getItem("loggedInUser"),
+      time: new Date().toLocaleString()
+    });
     localStorage.setItem("orders", JSON.stringify(orders));
-    renderOrders();
 
-    // ফর্ম ক্লিয়ার
+    alert("অর্ডার জমা হয়েছে!");
     document.getElementById("uid").value = "";
-    document.getElementById("diamond").selectedIndex = 0;
+    diamondSelect.selectedIndex = 0;
+    renderOrders();
   }
 
+  // Render Orders (Logged in user only)
   function renderOrders() {
     const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    const currentUser = localStorage.getItem("loggedInUser");
     const list = document.getElementById("orderList");
     list.innerHTML = "";
-    orders.forEach((o, i) => {
+
+    const userOrders = orders.filter(o => o.user === currentUser);
+    if (userOrders.length === 0) {
+      list.innerHTML = "<p>কোনো অর্ডার পাওয়া যায়নি।</p>";
+      return;
+    }
+
+    userOrders.forEach(o => {
       list.innerHTML += `
         <div class="order">
-          UID: ${o.uid}<br>
-          Diamond: ${o.diamond}<br>
-          Total: ৳${o.total}<br>
-          Status: <strong style="color:orange">${o.status}</strong>
+          <strong>UID:</strong> ${o.uid}<br />
+          <strong>Diamond:</strong> ${o.diamond}<br />
+          <strong>Total:</strong> ৳${o.total}<br />
+          <strong>Status:</strong> <em>${o.status}</em><br />
+          <small>Ordered on: ${o.time}</small>
         </div>
       `;
     });
   }
 
-  // পেজ লোড হলে চেক করব লগড ইন কিনা
-  window.onload = () => {
-    if (localStorage.getItem("loggedIn") === "yes") {
+  // On page load check logged in
+  window.onload = function() {
+    if (localStorage.getItem("loggedInUser")) {
       showApp();
+    } else {
+      showSignup();
     }
-  };
+  }
 </script>
 
 </body>
