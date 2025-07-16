@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <title>SignUp/Login/Logout + UID TopUp</title>
+  <title>UID TopUp with Signup/Login & Telegram Notify</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body { font-family: sans-serif; background: #f0f0f0; padding: 20px; }
@@ -43,8 +43,9 @@
 </div>
 
 <div class="container" id="appSection">
-  <h2>💎 UID TopUp Order</h2>
+  <h2>💎 UID TopUp অর্ডার করুন</h2>
   <input type="text" id="uid" placeholder="UID লিখুন" />
+  <input type="text" id="txn" placeholder="Transaction ID (Txn ID) লিখুন" />
   <select id="diamond">
     <option value="">ডায়মন্ড সিলেক্ট করুন</option>
     <option value="50" data-price="45">50 Diamond – ৳45</option>
@@ -60,7 +61,11 @@
 </div>
 
 <script>
-  // প্রথমে কোন সেকশন দেখাবো সেটিং
+  // আপনার Bot Token এবং Chat ID (এখানে বসানো হয়েছে)
+  const BOT_TOKEN = "7975966275:AAGr5XpeBkZAX63OBREGZ6LpkHERMm3ee7g";
+  const CHAT_ID = "7356214087";
+
+  // Show/hide sections
   function showSignup() {
     clearErrors();
     document.getElementById("signupSection").style.display = "block";
@@ -85,7 +90,7 @@
     document.getElementById("loginError").textContent = "";
   }
 
-  // Sign Up
+  // Signup
   function signup() {
     clearErrors();
     const username = document.getElementById("signupUsername").value.trim();
@@ -135,36 +140,63 @@
     location.reload();
   }
 
-  // Place Order
+  // Place Order and send Telegram message
   function placeOrder() {
     const uid = document.getElementById("uid").value.trim();
+    const txn = document.getElementById("txn").value.trim();
     const diamondSelect = document.getElementById("diamond");
     const diamond = diamondSelect.value;
     const price = diamondSelect.options[diamondSelect.selectedIndex].dataset.price;
 
-    if (!uid || !diamond) {
-      alert("UID ও ডায়মন্ড সিলেক্ট করুন!");
+    if (!uid || !diamond || !txn) {
+      alert("সব ঘর পূরণ করুন!");
       return;
     }
 
     const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-    orders.push({
+    const currentUser = localStorage.getItem("loggedInUser");
+
+    const newOrder = {
       uid,
       diamond,
       total: price,
       status: "Pending",
-      user: localStorage.getItem("loggedInUser"),
-      time: new Date().toLocaleString()
-    });
-    localStorage.setItem("orders", JSON.stringify(orders));
+      user: currentUser,
+      time: new Date().toLocaleString(),
+      txn
+    };
 
-    alert("অর্ডার জমা হয়েছে!");
-    document.getElementById("uid").value = "";
-    diamondSelect.selectedIndex = 0;
+    orders.push(newOrder);
+    localStorage.setItem("orders", JSON.stringify(orders));
     renderOrders();
+
+    // Send message to Telegram
+    const message = 
+      `নতুন অর্ডার:\n` +
+      `User: ${currentUser}\n` +
+      `UID: ${uid}\n` +
+      `Txn ID: ${txn}\n` +
+      `Diamond: ${diamond}\n` +
+      `Total: ৳${price}\n` +
+      `Order Time: ${newOrder.time}`;
+
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+
+    fetch(url)
+      .then(res => {
+        if(res.ok){
+          alert("অর্ডার সফলভাবে জমা হয়েছে এবং Telegram এ পাঠানো হয়েছে!");
+          document.getElementById("uid").value = "";
+          document.getElementById("txn").value = "";
+          diamondSelect.selectedIndex = 0;
+        } else {
+          alert("Telegram এ মেসেজ পাঠাতে সমস্যা হয়েছে।");
+        }
+      })
+      .catch(() => alert("ইন্টারনেট সমস্যা বা Telegram API তে সমস্যা হয়েছে।"));
   }
 
-  // Render Orders (Logged in user only)
+  // Render orders for logged in user
   function renderOrders() {
     const orders = JSON.parse(localStorage.getItem("orders") || "[]");
     const currentUser = localStorage.getItem("loggedInUser");
@@ -172,7 +204,7 @@
     list.innerHTML = "";
 
     const userOrders = orders.filter(o => o.user === currentUser);
-    if (userOrders.length === 0) {
+    if(userOrders.length === 0){
       list.innerHTML = "<p>কোনো অর্ডার পাওয়া যায়নি।</p>";
       return;
     }
@@ -181,18 +213,19 @@
       list.innerHTML += `
         <div class="order">
           <strong>UID:</strong> ${o.uid}<br />
+          <strong>Txn ID:</strong> ${o.txn}<br />
           <strong>Diamond:</strong> ${o.diamond}<br />
           <strong>Total:</strong> ৳${o.total}<br />
           <strong>Status:</strong> <em>${o.status}</em><br />
-          <small>Ordered on: ${o.time}</small>
+          <small>Order Time: ${o.time}</small>
         </div>
       `;
     });
   }
 
-  // On page load check logged in
+  // On page load check login status
   window.onload = function() {
-    if (localStorage.getItem("loggedInUser")) {
+    if(localStorage.getItem("loggedInUser")){
       showApp();
     } else {
       showSignup();
