@@ -3,123 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Boom TopUp</title>
+  <title>UID TopUp BD Server – BoomFlim</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background: #e91e63;
-      padding: 20px;
-    }
-    h1 {
-      margin: 0;
-      font-size: 30px;
-    }
-    .container {
-      padding: 20px;
-    }
-    input, select, button {
-      width: 90%;
-      max-width: 400px;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    input[type="file"] {
-      background: #fff;
-    }
-    button {
-      background: #4caf50;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    a.telegram-btn {
-      display: inline-block;
-      background: #0088cc;
-      color: white;
-      padding: 10px 20px;
-      margin-top: 15px;
-      border-radius: 5px;
-      text-decoration: none;
-    }
-    .help {
-      margin-top: 20px;
-      font-size: 14px;
-    }
-    /* Popup style */
-    #popup {
-      display: block;
-      position: fixed;
-      top: 30%;
-      left: 10%;
-      width: 80%;
-      background: #0088cc;
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      z-index: 9999;
-      box-shadow: 0 0 10px #000;
-    }
-    #popup a {
-      color: yellow;
-      font-weight: bold;
-    }
-    #popup button {
-      margin-top: 10px;
-      background: #333;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+    body { margin:0; font-family:Arial,sans-serif; background:#f5f5f5; color:#333; }
+    header { background:#e91e63; padding:20px; text-align:center; color:#fff; }
+    header h1 { margin:0; font-size:24px; }
+    header p { margin:5px 0 0; font-size:14px; }
+    .container { max-width:480px; margin:20px auto; background:#fff; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .form-group { margin-bottom:15px; }
+    label { display:block; margin-bottom:6px; font-weight:bold; }
+    input, select { width:100%; padding:10px; font-size:16px; border:1px solid #ccc; border-radius:4px; }
+    button { width:100%; padding:12px; background:#0088cc; color:#fff; font-size:16px; border:none; border-radius:4px; cursor:pointer; }
+    button:hover { background:#0077b3; }
+    .notice { background:#fffae6; padding:10px; border-left:4px solid #ffc107; margin-top:20px; font-size:14px; }
+    .footer { text-align:center; padding:15px; font-size:13px; color:#777; }
+    .footer a { color:#e91e63; text-decoration:none; }
   </style>
 </head>
 <body>
-  <!-- Popup -->
-  <div id="popup">
-    <h3>📢 আমাদের Telegram চ্যানেলে যোগ দিন!</h3>
-    <p>🔥 Exclusive offer & support</p>
-    <p>🎬 এখানে সব মুভি এবং ব্যাচেলর পয়েন্ট সিজন ৫ সব ইপিসোড পাবেন</p>
-    <a href="https://t.me/bachelorpointseason0005" target="_blank">👉 Click to Join @bachelorpointseason0005</a><br>
-    <button onclick="document.getElementById('popup').style.display='none'">Close</button>
-  </div>
 
-  <header>
-    <h1>Boom TopUp</h1>
-    <p>Trusted Free Fire Top-Up in Bangladesh</p>
-  </header>
+<header>
+  <h1>UID TopUp BD Server</h1>
+  <p>Buy Free Fire Diamonds by UID – Fast & Secure</p>
+</header>
 
-  <div class="container">
-    <form>
-      <input type="text" placeholder="Enter your Free Fire UID" required /><br />
-      <select required>
-        <option value="">Select Amount</option>
-        <option>100 Diamond</option>
-        <option>210 Diamond</option>
-        <option>530 Diamond</option>
-        <option>1080 Diamond</option>
-      </select><br />
-      <input type="file" accept="image/*" required /><br />
-      <button type="submit">Submit</button>
-    </form>
-
-    <div class="help">
-      <p><strong>📱 bKash Numbers:</strong><br />01987553830<br />01644105791</p>
-      <p>
-        📞 Help via Telegram:
-        <a class="telegram-btn" href="https://t.me/boomflim02" target="_blank">@boomflim02</a>
-      </p>
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="uid">Free Fire UID</label>
+      <input type="text" id="uid" name="uid" placeholder="Enter your Free Fire UID" required />
     </div>
+    <div class="form-group">
+      <label for="amount">Diamond Amount</label>
+      <select id="amount" name="amount" required>
+        <option value="">Select Amount</option>
+        <option>50 Diamond</option>
+        <option>115 Diamond</option>
+        <option>240 Diamond</option>
+        <option>355 Diamond</option>
+        <option>480 Diamond</option>
+        <option>610 Diamond</option>
+        <option>850 Diamond</option>
+        <option>1090 Diamond</option>
+        <option>1240 Diamond</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="txn">Payment Txn ID</label>
+      <input type="text" id="txn" name="txn" placeholder="Enter your Bkash/Nagad Txn ID" required />
+    </div>
+    <div class="form-group">
+      <label for="screenshot">Payment Screenshot</label>
+      <input type="file" id="screenshot" name="screenshot" accept="image/*" required />
+    </div>
+    <button type="submit">Place Order</button>
+  </form>
+
+  <div class="notice">
+    💡 24/7 টপ-আপ সুবিধা। সমস্যায় WhatsApp করুন: 01739545002  
+    🔥 শুধুমাত্র Bangladesh সার্ভার ID দিয়ে Diamond যাবে  [oai_citation:0‡fixtopup.com](https://fixtopup.com/?utm_source=chatgpt.com)
   </div>
+</div>
+
+<footer class="footer">
+  © 2025 BoomFlim. Developed by BoomFlim. <br>
+  <a href="https://fixtopup.com/topup/uid-topup-bd-server" target="_blank">Inspiration from fixtopup.com</a>
+</footer>
+
 </body>
 </html>
