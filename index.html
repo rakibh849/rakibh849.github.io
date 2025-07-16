@@ -2,330 +2,190 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <title>UID TopUp - Email দিয়ে লগইন/সাইন আপ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UID Topup BD</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212;
-      color: #eee;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
     }
-
-    .container {
-      background: #1e1e1e;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
-      max-width: 400px;
-      width: 100%;
-    }
-
-    h2 {
+    header {
+      background: #0d47a1;
+      color: white;
+      padding: 15px;
       text-align: center;
-      color: #f50057;
-      margin-bottom: 24px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: bold;
     }
-
-    input[type="email"],
-    input[type="password"],
-    select {
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .diamond-option {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .diamond-option label {
+      flex: 1 1 45%;
+      background: #e3f2fd;
+      padding: 10px;
+      border: 2px solid #90caf9;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .diamond-option input {
+      display: none;
+    }
+    .diamond-option input:checked + label {
+      background: #1976d2;
+      color: white;
+      border-color: #0d47a1;
+    }
+    input[type="text"] {
       width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid #555;
-      padding: 10px 5px;
-      margin-bottom: 30px;
-      font-size: 16px;
-      color: #eee;
-      outline: none;
-      transition: border-color 0.3s;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
-
-    input[type="email"]:focus,
-    input[type="password"]:focus,
-    select:focus {
-      border-bottom-color: #f50057;
+    .payment-methods {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
     }
-
-    ::placeholder {
-      color: #bbb;
+    .payment-methods label {
+      background: #eeeeee;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: 2px solid transparent;
     }
-
-    button {
+    .payment-methods input {
+      display: none;
+    }
+    .payment-methods input:checked + label {
+      border-color: #43a047;
+      background: #c8e6c9;
+    }
+    .buy-btn {
       width: 100%;
       padding: 12px;
-      font-size: 18px;
-      font-weight: 600;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      background: #f50057;
+      background: #0d47a1;
       color: white;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #c40048;
-    }
-    button.logout {
-      background: #ff1744;
-      margin-top: 10px;
-    }
-    button.logout:hover {
-      background: #d50036;
-    }
-
-    .toggle-link {
-      display: block;
-      text-align: center;
-      margin: 20px 0;
-      color: #f50057;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
       cursor: pointer;
-      text-decoration: underline;
-      font-weight: 600;
-      user-select: none;
     }
-
-    .error {
-      color: #ff5252;
-      font-size: 14px;
-      margin-bottom: 15px;
-      text-align: center;
+    .price-display {
+      margin: 10px 0;
+      font-weight: bold;
+      color: #e53935;
     }
-
-    .order {
-      background: #2c2c2c;
-      padding: 12px 15px;
-      border-left: 4px solid #f50057;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      font-size: 15px;
-      line-height: 1.4;
-      word-break: break-word;
+    .copy-btn {
+      margin-left: 10px;
+      padding: 4px 8px;
+      background: #4caf50;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .copy-btn:hover {
+      background: #388e3c;
     }
   </style>
 </head>
 <body>
 
-<div class="container" id="signupSection">
-  <h2>নতুন ইউজার রেজিস্ট্রেশন</h2>
-  <div id="signupError" class="error"></div>
-  <input type="email" id="signupEmail" placeholder="ইমেইল লিখুন" />
-  <input type="password" id="signupPassword" placeholder="পাসওয়ার্ড লিখুন" />
-  <button onclick="signup()">সাইন আপ করুন</button>
-  <span class="toggle-link" onclick="showLogin()">আগে থেকে একাউন্ট আছে? লগইন করুন</span>
-</div>
+<header>💎 UID TOPUP BD SERVER</header>
 
-<div class="container" id="loginSection">
-  <h2>লগইন করুন</h2>
-  <div id="loginError" class="error"></div>
-  <input type="email" id="loginEmail" placeholder="ইমেইল" />
-  <input type="password" id="loginPassword" placeholder="পাসওয়ার্ড" />
-  <button onclick="login()">লগইন</button>
-  <span class="toggle-link" onclick="showSignup()">নতুন ইউজার? সাইন আপ করুন</span>
-</div>
+<div class="container">
+  <div class="section-title">1️⃣ Select Recharge</div>
+  <div class="diamond-option">
+    <input type="radio" name="diamond" id="d25" value="22"><label for="d25">25 Diamond<br>৳22</label>
+    <input type="radio" name="diamond" id="d50" value="37"><label for="d50">50 Diamond<br>৳37</label>
+    <input type="radio" name="diamond" id="d115" value="76"><label for="d115">115 Diamond<br>৳76</label>
+    <input type="radio" name="diamond" id="d240" value="151"><label for="d240">240 Diamond<br>৳151</label>
+    <input type="radio" name="diamond" id="d355" value="227"><label for="d355">355 Diamond<br>৳227</label>
+    <input type="radio" name="diamond" id="d480" value="302"><label for="d480">480 Diamond<br>৳302</label>
+  </div>
 
-<div class="container" id="appSection">
-  <h2>💎 UID TopUp অর্ডার করুন</h2>
-  <input type="text" id="uid" placeholder="UID লিখুন" />
-  <input type="text" id="txn" placeholder="Transaction ID (Txn ID) লিখুন" />
-  <select id="diamond">
-    <option value="">ডায়মন্ড সিলেক্ট করুন</option>
-    <option value="50" data-price="45">50 Diamond – ৳45</option>
-    <option value="115" data-price="85">115 Diamond – ৳85</option>
-    <option value="240" data-price="130">240 Diamond – ৳130</option>
-    <option value="355" data-price="180">355 Diamond – ৳180</option>
-  </select>
-  <button onclick="placeOrder()">✅ অর্ডার করুন</button>
-  <button class="logout" onclick="logout()">🚪 লগআউট</button>
+  <div class="section-title">2️⃣ Player UID দিন</div>
+  <input type="text" id="uid" placeholder="Player UID লিখুন" />
 
-  <h3>📃 আপনার অর্ডার তালিকা</h3>
-  <div id="orderList"></div>
+  <div class="section-title">3️⃣ পেমেন্ট পদ্ধতি</div>
+  <div class="payment-methods">
+    <input type="radio" name="payment" id="wallet" checked><label for="wallet">Wallet</label>
+    <input type="radio" name="payment" id="auto"><label for="auto">Auto Pay</label>
+  </div>
+
+  <div class="section-title">📱 bKash নম্বরে পেমেন্ট করুন</div>
+  <div style="margin-bottom: 20px;">
+    🔹 bKash Personal: <strong id="bkash1">01987553830</strong> 
+    <button class="copy-btn" onclick="copyToClipboard('bkash1')">📋 কপি</button><br><br>
+    🔹 bKash Personal: <strong id="bkash2">01644105791</strong> 
+    <button class="copy-btn" onclick="copyToClipboard('bkash2')">📋 কপি</button>
+  </div>
+
+  <div class="section-title">🧾 Transaction ID (Txn ID)</div>
+  <input type="text" id="txn" placeholder="bKash থেকে পাওয়া Txn ID লিখুন" />
+
+  <div class="price-display" id="priceDisplay">মূল্য: ৳0</div>
+
+  <button class="buy-btn" onclick="buyNow()">✅ BUY NOW</button>
 </div>
 
 <script>
-  const BOT_TOKEN = "7975966275:AAGr5XpeBkZAX63OBREGZ6LpkHERMm3ee7g";
-  const CHAT_ID = "7356214087";
+  const diamonds = document.querySelectorAll('input[name="diamond"]');
+  const priceDisplay = document.getElementById('priceDisplay');
 
-  function showSignup() {
-    clearErrors();
-    document.getElementById("signupSection").style.display = "block";
-    document.getElementById("loginSection").style.display = "none";
-    document.getElementById("appSection").style.display = "none";
-  }
-  function showLogin() {
-    clearErrors();
-    document.getElementById("signupSection").style.display = "none";
-    document.getElementById("loginSection").style.display = "block";
-    document.getElementById("appSection").style.display = "none";
-  }
-  function showApp() {
-    clearErrors();
-    document.getElementById("signupSection").style.display = "none";
-    document.getElementById("loginSection").style.display = "none";
-    document.getElementById("appSection").style.display = "block";
-    renderOrders();
-  }
-  function clearErrors() {
-    document.getElementById("signupError").textContent = "";
-    document.getElementById("loginError").textContent = "";
-  }
+  diamonds.forEach((radio) => {
+    radio.addEventListener('change', () => {
+      priceDisplay.textContent = `মূল্য: ৳${radio.value}`;
+    });
+  });
 
-  function signup() {
-    clearErrors();
-    const email = document.getElementById("signupEmail").value.trim().toLowerCase();
-    const password = document.getElementById("signupPassword").value.trim();
-
-    if (!email || !password) {
-      document.getElementById("signupError").textContent = "সব ঘর পূরণ করুন।";
-      return;
-    }
-
-    // ইমেইল সিম্পল ভ্যালিডেশন
-    if (!validateEmail(email)) {
-      document.getElementById("signupError").textContent = "সঠিক ইমেইল লিখুন।";
-      return;
-    }
-
-    let users = JSON.parse(localStorage.getItem("users") || "{}");
-    if (users[email]) {
-      document.getElementById("signupError").textContent = "এই ইমেইল দিয়ে আগে থেকেই রেজিস্ট্রেশন আছে।";
-      return;
-    }
-
-    users[email] = password;
-    localStorage.setItem("users", JSON.stringify(users));
-    alert("রেজিস্ট্রেশন সম্পন্ন! এখন লগইন করুন।");
-    showLogin();
-  }
-
-  function login() {
-    clearErrors();
-    const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-    const password = document.getElementById("loginPassword").value.trim();
-
-    if (!email || !password) {
-      document.getElementById("loginError").textContent = "সব ঘর পূরণ করুন।";
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      document.getElementById("loginError").textContent = "সঠিক ইমেইল লিখুন।";
-      return;
-    }
-
-    let users = JSON.parse(localStorage.getItem("users") || "{}");
-    if (!users[email] || users[email] !== password) {
-      document.getElementById("loginError").textContent = "ইমেইল বা পাসওয়ার্ড ভুল।";
-      return;
-    }
-
-    localStorage.setItem("loggedInUser", email);
-    showApp();
-  }
-
-  function logout() {
-    localStorage.removeItem("loggedInUser");
-    location.reload();
-  }
-
-  function placeOrder() {
-    const uid = document.getElementById("uid").value.trim();
-    const txn = document.getElementById("txn").value.trim();
-    const diamondSelect = document.getElementById("diamond");
-    const diamond = diamondSelect.value;
-    const price = diamondSelect.options[diamondSelect.selectedIndex].dataset.price;
-
-    if (!uid || !diamond || !txn) {
-      alert("সব ঘর পূরণ করুন!");
-      return;
-    }
-
-    const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-    const currentUser = localStorage.getItem("loggedInUser");
-
-    const newOrder = {
-      uid,
-      diamond,
-      total: price,
-      status: "Pending",
-      user: currentUser,
-      time: new Date().toLocaleString(),
-      txn
-    };
-
-    orders.push(newOrder);
-    localStorage.setItem("orders", JSON.stringify(orders));
-    renderOrders();
-
-    const message = 
-      `নতুন অর্ডার:\n` +
-      `User Email: ${currentUser}\n` +
-      `UID: ${uid}\n` +
-      `Txn ID: ${txn}\n` +
-      `Diamond: ${diamond}\n` +
-      `Total: ৳${price}\n` +
-      `Order Time: ${newOrder.time}`;
-
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
-
-    fetch(url)
-      .then(res => {
-        if(res.ok){
-          alert("অর্ডার সফলভাবে জমা হয়েছে এবং Telegram এ পাঠানো হয়েছে!");
-          document.getElementById("uid").value = "";
-          document.getElementById("txn").value = "";
-          diamondSelect.selectedIndex = 0;
-        } else {
-          alert("Telegram এ মেসেজ পাঠাতে সমস্যা হয়েছে।");
-        }
-      })
-      .catch(() => alert("ইন্টারনেট সমস্যা বা Telegram API তে সমস্যা হয়েছে।"));
-  }
-
-  function renderOrders() {
-    const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-    const currentUser = localStorage.getItem("loggedInUser");
-    const list = document.getElementById("orderList");
-    list.innerHTML = "";
-
-    const userOrders = orders.filter(o => o.user === currentUser);
-    if(userOrders.length === 0){
-      list.innerHTML = "<p>কোনো অর্ডার পাওয়া যায়নি।</p>";
-      return;
-    }
-
-    userOrders.forEach(o => {
-      list.innerHTML += `
-        <div class="order">
-          <strong>UID:</strong> ${o.uid}<br />
-          <strong>Txn ID:</strong> ${o.txn}<br />
-          <strong>Diamond:</strong> ${o.diamond}<br />
-          <strong>Total:</strong> ৳${o.total}<br />
-          <strong>Status:</strong> <em>${o.status}</em><br />
-          <small>Order Time: ${o.time}</small>
-        </div>
-      `;
+  function copyToClipboard(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      alert("✅ কপি হয়েছে: " + text);
+    }).catch(() => {
+      alert("❌ কপি করতে সমস্যা হয়েছে!");
     });
   }
 
-  function validateEmail(email) {
-    // সিম্পল ইমেইল ভ্যালিডেশন Regex
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
+  function buyNow() {
+    const selected = document.querySelector('input[name="diamond"]:checked');
+    const uid = document.getElementById('uid').value.trim();
+    const txn = document.getElementById('txn').value.trim();
+    const payMethod = document.querySelector('input[name="payment"]:checked').id;
 
-  window.onload = function() {
-    if(localStorage.getItem("loggedInUser")){
-      showApp();
-    } else {
-      showSignup();
+    if (!selected || uid === '' || txn === '') {
+      alert("⚠️ Diamond, UID এবং Txn ID পূরণ করুন!");
+      return;
     }
+
+    alert(
+      `✅ অর্ডার সফল!\n` +
+      `UID: ${uid}\n` +
+      `Diamond: ${selected.nextElementSibling.innerText}\n` +
+      `Txn ID: ${txn}\n` +
+      `পেমেন্ট মেথড: ${payMethod}`
+    );
   }
 </script>
 
