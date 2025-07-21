@@ -2,199 +2,110 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Boom Flim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boom Flim - Bachelor Point</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
       background: #111;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e50914;
+    }
+
+    .season {
+      background: #222;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    .season h2 {
+      margin: 0 0 10px 0;
       color: #fff;
     }
 
-    header {
-      background: #000;
-      padding: 20px;
-      text-align: center;
-      font-size: 2em;
-      color: #e50914;
-      font-weight: bold;
+    .episodes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    header input {
-      width: 90%;
-      max-width: 500px;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
+    .episodes button {
+      padding: 10px 15px;
+      background: #e50914;
       border: none;
-      font-size: 1em;
-    }
-
-    .section {
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section-title {
-      font-size: 1.6em;
-      margin: 20px 0 10px;
-      color: #ffcc00;
-    }
-
-    .movie-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .movie-card {
-      background: #222;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
+      border-radius: 5px;
+      color: #fff;
       cursor: pointer;
     }
 
-    .movie-card img,
-    .movie-card iframe {
-      width: 100%;
-      height: auto;
-      display: block;
+    .episodes button:hover {
+      background: #b0060e;
     }
 
-    .movie-card iframe {
-      aspect-ratio: 16 / 9;
+    .video-wrapper {
+      position: relative;
+      padding-top: 56.25%;
+      margin-top: 20px;
       display: none;
     }
 
-    .movie-title {
-      padding: 10px;
-      text-align: center;
-      background: #000;
-      font-weight: bold;
-    }
-
-    .controls {
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .controls a {
-      display: inline-block;
-      margin: 5px;
-      background: #e50914;
-      padding: 8px 15px;
-      border-radius: 4px;
-      color: white;
-      text-decoration: none;
-      font-size: 0.9em;
-    }
-
-    .controls a:hover {
-      background: #c40810;
-    }
-
-    footer {
-      background: #000;
-      color: #aaa;
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
     @media (max-width: 600px) {
-      header {
-        font-size: 1.5em;
-      }
-
-      .controls a {
-        font-size: 0.8em;
-        padding: 6px 10px;
+      .episodes {
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Boom Flim: Bachelor Point</h1>
 
-  <header>
-    Boom Flim<br />
-    <input type="text" placeholder="Search Movies/TV Shows..." />
-  </header>
-
-  <!-- Hindi Movies -->
-  <div class="section">
-    <h2 class="section-title">🔥 Hindi Movies</h2>
-    <div class="movie-grid">
-
-      <!-- Animal (2023) -->
-      <div class="movie-card" onclick="playVideo(this, '1hkL-SpRHLLmCed5DzW9YqJlTRxUiXJEN')">
-        <img src="https://i.postimg.cc/6qmB3CyC/animal-movie.jpg" alt="Animal Movie">
-        <iframe allow="autoplay" allowfullscreen></iframe>
-        <div class="movie-title">Animal (2023)</div>
-        <div class="controls">
-          <a href="https://drive.google.com/uc?export=download&id=1hkL-SpRHLLmCed5DzW9YqJlTRxUiXJEN" target="_blank">⬇ Download</a>
-          <a href="#" onclick="shareMovie(event)">🔗 Share</a>
-          <a href="#">➡️ Next</a>
-        </div>
+    <!-- Season 5 -->
+    <div class="season">
+      <h2>Season 5</h2>
+      <div class="episodes">
+        <button onclick="playEpisode('https://www.youtube.com/embed/Gs0fdpzRd4k')">Episode 9</button>
+        <button onclick="playEpisode('https://www.youtube.com/embed/VIDEO_ID_2')">Episode 10</button>
+        <button onclick="playEpisode('https://www.youtube.com/embed/VIDEO_ID_3')">Episode 11</button>
       </div>
+    </div>
 
+    <!-- Future seasons can be added similarly -->
+
+    <!-- Video Player -->
+    <div class="video-wrapper" id="videoBox">
+      <iframe id="videoFrame" allowfullscreen allow="autoplay; encrypted-media"></iframe>
     </div>
   </div>
-
-  <!-- Bangla Movies -->
-  <div class="section">
-    <h2 class="section-title">🇧🇩 Bangla Movies</h2>
-    <div class="movie-grid">
-
-      <!-- Tandob (2025) -->
-      <div class="movie-card" onclick="playVideo(this, '1EHoI5R0q9Q8_gI5R0xOumpH2sUM_b6vF')">
-        <img src="https://i.postimg.cc/8Pbs3XG4/tandob-2025.jpg" alt="Tandob 2025">
-        <iframe allow="autoplay" allowfullscreen></iframe>
-        <div class="movie-title">Tandob (2025)</div>
-        <div class="controls">
-          <a href="https://drive.google.com/uc?export=download&id=1EHoI5R0q9Q8_gI5R0xOumpH2sUM_b6vF" target="_blank">⬇ Download</a>
-          <a href="#" onclick="shareMovie(event)">🔗 Share</a>
-          <a href="#">➡️ Next</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <footer>
-    © 2025 Boom Flim. All rights reserved.
-  </footer>
 
   <script>
-    function playVideo(container, videoId) {
-      const iframe = container.querySelector('iframe');
-      const img = container.querySelector('img');
-      iframe.src = `https://drive.google.com/file/d/${videoId}/preview`;
-      img.style.display = 'none';
-      iframe.style.display = 'block';
-
-      // Try fullscreen on supported devices
-      if (iframe.requestFullscreen) {
-        iframe.requestFullscreen();
-      } else if (iframe.webkitRequestFullscreen) {
-        iframe.webkitRequestFullscreen();
-      } else if (iframe.msRequestFullscreen) {
-        iframe.msRequestFullscreen();
-      }
-    }
-
-    function shareMovie(e) {
-      e.stopPropagation(); // prevent card click
-      navigator.clipboard.writeText(window.location.href);
-      alert('✅ Link copied to clipboard!');
+    function playEpisode(url) {
+      const box = document.getElementById('videoBox');
+      const frame = document.getElementById('videoFrame');
+      frame.src = url + '?autoplay=1';
+      box.style.display = 'block';
     }
   </script>
-
 </body>
 </html>
