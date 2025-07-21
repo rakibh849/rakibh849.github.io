@@ -5,173 +5,196 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Boom Flim</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0e0e0e;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #111;
       color: #fff;
     }
+
     header {
-      background: #111;
+      background: #000;
       padding: 20px;
       text-align: center;
+      font-size: 2em;
       color: #e50914;
-      font-size: 2rem;
       font-weight: bold;
     }
+
     header input {
-      margin-top: 10px;
-      padding: 10px;
-      width: 60%;
+      width: 90%;
       max-width: 500px;
+      padding: 10px;
+      margin-top: 10px;
       border-radius: 5px;
       border: none;
-      font-size: 1rem;
+      font-size: 1em;
     }
+
     .section {
-      padding: 30px 20px;
+      padding: 20px;
       max-width: 1200px;
       margin: auto;
     }
+
     .section-title {
-      font-size: 1.6rem;
-      margin-bottom: 20px;
-      border-left: 4px solid #e50914;
-      padding-left: 10px;
+      font-size: 1.6em;
+      margin: 20px 0 10px;
+      color: #ffcc00;
     }
-    .movie-banner {
-      position: relative;
-      max-width: 900px;
-      margin: auto;
-      cursor: pointer;
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .movie-card {
+      background: #222;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+      position: relative;
+      cursor: pointer;
     }
-    .movie-banner img, .movie-banner video {
+
+    .movie-card img,
+    .movie-card iframe {
       width: 100%;
       height: auto;
       display: block;
     }
-    .movie-banner video {
+
+    .movie-card iframe {
+      aspect-ratio: 16 / 9;
       display: none;
-      border-radius: 10px;
     }
-    .controls {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .controls a {
-      display: inline-block;
-      margin: 8px;
-      padding: 10px 18px;
-      background: #e50914;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .controls a:hover {
-      background: #c2060f;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-    .card {
-      background: #1e1e1e;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-    .card:hover {
-      transform: scale(1.05);
-    }
-    .card img {
-      width: 100%;
-      display: block;
-    }
-    .card p {
+
+    .movie-title {
       padding: 10px;
       text-align: center;
+      background: #000;
+      font-weight: bold;
     }
-    footer {
-      background: #111;
+
+    .controls {
       text-align: center;
-      padding: 15px;
+      margin-top: 10px;
+    }
+
+    .controls a {
+      display: inline-block;
+      margin: 5px;
+      background: #e50914;
+      padding: 8px 15px;
+      border-radius: 4px;
+      color: white;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+
+    .controls a:hover {
+      background: #c40810;
+    }
+
+    footer {
+      background: #000;
       color: #aaa;
-      font-size: 0.9rem;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.5em;
+      }
+
+      .controls a {
+        font-size: 0.8em;
+        padding: 6px 10px;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    Boom Flim<br>
-    <input type="text" placeholder="Search movies or TV shows...">
+    Boom Flim<br />
+    <input type="text" placeholder="Search Movies/TV Shows..." />
   </header>
 
-  <section class="section">
-    <h2 class="section-title">🔥 Hindi Movie Spotlight</h2>
+  <!-- Hindi Movies -->
+  <div class="section">
+    <h2 class="section-title">🔥 Hindi Movies</h2>
+    <div class="movie-grid">
 
-    <div class="movie-banner" onclick="playMovie(this)" data-id="1hkL-SpRHLLmCed5DzW9YqJlTRxUiXJEN">
-      <img src="https://i.postimg.cc/6qmB3CyC/animal-movie.jpg" alt="Animal Movie">
-      <video controls></video>
-    </div>
+      <!-- Animal (2023) -->
+      <div class="movie-card" onclick="playVideo(this, '1hkL-SpRHLLmCed5DzW9YqJlTRxUiXJEN')">
+        <img src="https://i.postimg.cc/6qmB3CyC/animal-movie.jpg" alt="Animal Movie">
+        <iframe allow="autoplay" allowfullscreen></iframe>
+        <div class="movie-title">Animal (2023)</div>
+        <div class="controls">
+          <a href="https://drive.google.com/uc?export=download&id=1hkL-SpRHLLmCed5DzW9YqJlTRxUiXJEN" target="_blank">⬇ Download</a>
+          <a href="#" onclick="shareMovie(event)">🔗 Share</a>
+          <a href="#">➡️ Next</a>
+        </div>
+      </div>
 
-    <div class="controls">
-      <a id="downloadBtn" href="#" target="_blank">⬇ Download</a>
-      <a href="#" onclick="shareMovie()">🔗 Share</a>
-      <a href="#">⏭️ Next</a>
     </div>
-  </section>
+  </div>
 
-  <section class="section">
-    <h2 class="section-title">🎬 Trending Now</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/39/Squid_Game.jpg" alt="Squid Game">
-        <p>Squid Game</p>
+  <!-- Bangla Movies -->
+  <div class="section">
+    <h2 class="section-title">🇧🇩 Bangla Movies</h2>
+    <div class="movie-grid">
+
+      <!-- Tandob (2025) -->
+      <div class="movie-card" onclick="playVideo(this, '1EHoI5R0q9Q8_gI5R0xOumpH2sUM_b6vF')">
+        <img src="https://i.postimg.cc/8Pbs3XG4/tandob-2025.jpg" alt="Tandob 2025">
+        <iframe allow="autoplay" allowfullscreen></iframe>
+        <div class="movie-title">Tandob (2025)</div>
+        <div class="controls">
+          <a href="https://drive.google.com/uc?export=download&id=1EHoI5R0q9Q8_gI5R0xOumpH2sUM_b6vF" target="_blank">⬇ Download</a>
+          <a href="#" onclick="shareMovie(event)">🔗 Share</a>
+          <a href="#">➡️ Next</a>
+        </div>
       </div>
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/7/75/Good_Boy_movie.jpg" alt="Good Boy">
-        <p>Good Boy</p>
-      </div>
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/4/4b/Arjun_Vijay_movie_poster.jpg" alt="Arjun">
-        <p>Arjun Movie</p>
-      </div>
+
     </div>
-  </section>
+  </div>
 
   <footer>
-    &copy; 2025 Boom Flim. All rights reserved.
+    © 2025 Boom Flim. All rights reserved.
   </footer>
 
   <script>
-    function playMovie(container) {
-      const video = container.querySelector('video');
+    function playVideo(container, videoId) {
+      const iframe = container.querySelector('iframe');
       const img = container.querySelector('img');
-      const id = container.getAttribute('data-id');
-
-      const videoURL = `https://drive.google.com/uc?export=download&id=${id}`;
-      video.src = videoURL;
-      video.style.display = 'block';
+      iframe.src = `https://drive.google.com/file/d/${videoId}/preview`;
       img.style.display = 'none';
-      video.play();
+      iframe.style.display = 'block';
 
-      document.getElementById('downloadBtn').href = videoURL;
+      // Try fullscreen on supported devices
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
     }
 
-    function shareMovie() {
-      const url = window.location.href;
-      navigator.clipboard.writeText(url).then(() => {
-        alert("🔗 Link copied to clipboard!");
-      });
+    function shareMovie(e) {
+      e.stopPropagation(); // prevent card click
+      navigator.clipboard.writeText(window.location.href);
+      alert('✅ Link copied to clipboard!');
     }
   </script>
+
 </body>
 </html>
